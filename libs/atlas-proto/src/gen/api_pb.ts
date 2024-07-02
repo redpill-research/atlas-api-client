@@ -49,7 +49,12 @@ export class AuthStartRequest extends Message<AuthStartRequest> {
  */
 export class AuthStartResponse extends Message<AuthStartResponse> {
   /**
-   * @generated from field: string message_for_sign = 1;
+   * @generated from field: string auth_id = 1;
+   */
+  authId = "";
+
+  /**
+   * @generated from field: string message_for_sign = 2;
    */
   messageForSign = "";
 
@@ -61,7 +66,8 @@ export class AuthStartResponse extends Message<AuthStartResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "api.AuthStartResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "message_for_sign", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "auth_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "message_for_sign", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AuthStartResponse {
@@ -86,9 +92,9 @@ export class AuthStartResponse extends Message<AuthStartResponse> {
  */
 export class AuthConfirmRequest extends Message<AuthConfirmRequest> {
   /**
-   * @generated from field: string address = 1;
+   * @generated from field: string auth_id = 1;
    */
-  address = "";
+  authId = "";
 
   /**
    * @generated from field: string signature = 2;
@@ -103,7 +109,7 @@ export class AuthConfirmRequest extends Message<AuthConfirmRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "api.AuthConfirmRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "address", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "auth_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "signature", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
@@ -129,19 +135,9 @@ export class AuthConfirmRequest extends Message<AuthConfirmRequest> {
  */
 export class AuthConfirmResponse extends Message<AuthConfirmResponse> {
   /**
-   * @generated from field: string token = 1;
+   * @generated from field: string session_token = 1;
    */
-  token = "";
-
-  /**
-   * @generated from field: string key = 2;
-   */
-  key = "";
-
-  /**
-   * @generated from field: string nonce = 3;
-   */
-  nonce = "";
+  sessionToken = "";
 
   constructor(data?: PartialMessage<AuthConfirmResponse>) {
     super();
@@ -151,9 +147,7 @@ export class AuthConfirmResponse extends Message<AuthConfirmResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "api.AuthConfirmResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "nonce", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "session_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AuthConfirmResponse {
