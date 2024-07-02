@@ -1,6 +1,6 @@
 {
   "name": "@red-pill/atlas-api-react",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "dependencies": {
     "@red-pill/atlas-api-js": "workspace:*",
     "@red-pill/atlas-proto": "workspace:*"
