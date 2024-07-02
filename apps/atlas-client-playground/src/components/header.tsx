@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import { Logo } from "./logo";
+import clsx from 'clsx';
+import { Logo } from './logo';
 
 export function Header({
   className,
@@ -11,7 +11,8 @@ export function Header({
   return (
     <header
       className={clsx(
-        "bg-bg-1 border-graphic-second-2 z-50 border-y",
+        'border-graphic-second-2 z-50 border-y',
+        'bg-[rgb(240,240,239)]/80 text-[rgb(18,18,18)] dark:bg-[rgb(18,18,18)]/80 dark:text-[rgb(240,240,239)] backdrop-blur',
         className
       )}
     >

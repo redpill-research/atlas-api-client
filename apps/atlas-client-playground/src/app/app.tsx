@@ -1,9 +1,14 @@
+import { AtlasApiProvider } from '@red-pill/atlas-api-react';
 import { Header } from '../components/header';
 import { Heading } from '../components/heading';
 import { DayIcon, NightIcon } from '../components/icons';
 import { Container, Page } from '../components/layout';
 import { useThemeToggle } from '../hooks/use-theme-toggle';
-import { AtlasClient } from './atlas-client';
+import {
+  AtlasClientPlayground,
+  AtlasGetCountries,
+  AtlasGetProductsByCountries,
+} from './atlas-client-playground';
 
 function RightSlot() {
   const [theme, toggleTheme] = useThemeToggle();
@@ -31,7 +36,10 @@ function App() {
           Atlas Protocat Client Lab
         </Heading>
 
-        <AtlasClient />
+        <div className="grid md:grid-cols-2 gap-6 my-6">
+          <AtlasGetCountries />
+          <AtlasGetProductsByCountries />
+        </div>
       </Container>
     </Page>
   );
