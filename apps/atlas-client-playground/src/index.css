@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
+:root {
+  --font-apple: -apple-system, 'BlinkMacSystemFont';
+  --font-fallback: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-family-base: 'Barlow', sans-serif;
+
+  /* Colors to reuse in this file */
+  --white: 240, 240, 239;
+  --black: 18, 18, 18;
+  --red-1: 239, 62, 35;
+  --red-2: 195, 40, 16;
+  --red-3: 239, 124, 107;
+  --red-4: 240, 196, 189;
+  --blue-1: 25, 76, 176;
+  --blue-2: 47, 111, 235;
+
+  /* Colors that don't depend on a theme */
+  --text-base-3: var(--white);
+  --graphic-base-3: var(--white);
+  --text-red-1: var(--red-1);
+  --text-red-2: var(--red-2);
+  --text-blue-1: var(--blue-1);
+  --graphic-red-1: var(--red-1);
+  --graphic-red-2: var(--red-2);
+  --graphic-red-3: var(--red-3);
+  --graphic-red-4: var(--red-4);
+  --graphic-blue-1: var(--blue-1);
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  height: 100vh;
+  overflow: auto;
+  will-change: auto;
+}
+
+/* Color themes */
+.light {
+  --text-base-1: var(--black);
+  --text-base-2: 145, 145, 145;
+  --text-base-4: var(--white);
+  --text-second-1: 187, 187, 187;
+  --graphic-base-1: var(--black);
+  --graphic-base-2: 145, 145, 145;
+  --graphic-second-1: 187, 187, 187;
+  --graphic-second-2: 205, 205, 205;
+  --graphic-second-3: 235, 235, 235;
+  --graphic-second-4: 221, 221, 221;
+  --graphic-second-5: 85, 85, 85;
+  --graphic-second-6: 0, 0, 0;
+  --graphic-second-7: 255, 255, 255, 0.95;
+  --graphic-second-8: 18, 18, 18, 0.7;
+}
+
+.dark {
+  --text-base-1: var(--white);
+  --text-base-2: 123, 123, 123;
+  --text-base-4: var(--black);
+  --text-second-1: 84, 84, 84;
+  --graphic-base-1: var(--white);
+  --graphic-base-2: 123, 123, 123;
+  --graphic-second-1: 92, 92, 92;
+  --graphic-second-2: 43, 43, 43;
+  --graphic-second-3: 23, 23, 23;
+  --graphic-second-4: 40, 40, 40;
+  --graphic-second-5: 187, 187, 187;
+  --graphic-second-6: 255, 255, 255;
+  --graphic-second-7: 28, 28, 28, 0.95;
+  --graphic-second-8: 0, 0, 0, 0.8;
+}
+
+#root {
+  @apply bg-[rgb(240,240,239)] text-[rgb(18,18,18)];
+  @apply dark:bg-[rgb(18,18,18)] dark:text-[rgb(240,240,239)];
+  @apply duration-150 transition-colors delay-0 ease-out;
+}
+
+#root * {
+  @apply duration-150 transition-colors delay-0 ease-out;
+}

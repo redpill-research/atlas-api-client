@@ -1,0 +1,3 @@
+[submodule "libs/atlas-proto/protocat"]
+	path = libs/atlas-proto/protocat
+	url = https://github.com/redpill-research/protocat.git
