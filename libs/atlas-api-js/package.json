@@ -3,5 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "@red-pill/atlas-proto": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
