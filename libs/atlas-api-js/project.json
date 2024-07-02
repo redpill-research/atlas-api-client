@@ -3,13 +3,6 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/atlas-api-js/src",
   "projectType": "library",
-  "release": {
-    "version": {
-      "generatorOptions": {
-        "packageRoot": "dist/{projectRoot}"
-      }
-    }
-  },
   "tags": [],
   "// targets": "to see all targets run: nx show project atlas-api-js --web",
   "targets": {
