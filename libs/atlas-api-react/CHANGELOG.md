@@ -1,3 +1,15 @@
+## 0.7.6 (2024-07-02)
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** update npm publish path ([912a631](https://github.com/redpill-research/atlas-js-client/commit/912a631))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.7.5 (2024-07-02)
 
 
