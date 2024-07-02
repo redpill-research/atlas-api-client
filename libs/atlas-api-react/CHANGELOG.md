@@ -1,3 +1,21 @@
+## 0.6.0 (2024-07-02)
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** update build config ([601fe21](https://github.com/redpill-research/atlas-js-client/commit/601fe21))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.6.0
+- Updated atlas-api-js to 0.6.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.5.1 (2024-07-02)
 
 
