@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@red-pill/atlas-api-js": ["libs/atlas-api-js/src/index.ts"],
+      "@red-pill/atlas-api-react": ["libs/atlas-api-react/src/index.ts"],
       "@red-pill/atlas-proto": ["libs/atlas-proto/src/index.ts"]
     }
   },
