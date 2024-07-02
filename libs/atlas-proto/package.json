@@ -1,6 +1,6 @@
 {
   "name": "@red-pill/atlas-proto",
-  "version": "0.7.1",
+  "version": "0.7.5",
   "dependencies": {
     "@swc/helpers": "~0.5.11",
     "@bufbuild/protobuf": "^1.10.0"

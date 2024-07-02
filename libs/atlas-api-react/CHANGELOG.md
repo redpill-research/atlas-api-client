@@ -1,3 +1,11 @@
+## 0.7.5 (2024-07-02)
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.7.5
+- Updated atlas-api-js to 0.7.5
+
 ## 0.7.1 (2024-07-02)
 
 This was a version bump only for atlas-api-react to align it with other projects, there were no code changes.
