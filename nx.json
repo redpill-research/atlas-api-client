@@ -10,7 +10,11 @@
     }
   },
   "release": {
-    "projects": ["libs/atlas-api-js", "libs/atlas-proto"],
+    "projects": [
+      "libs/atlas-proto",
+      "libs/atlas-api-react",
+      "libs/atlas-api-js"
+    ],
     "projectsRelationship": "independent",
     "version": {
       "preVersionCommand": "pnpm exec nx run-many -t build --verbose",
