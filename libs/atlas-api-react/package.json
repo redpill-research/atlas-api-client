@@ -2,7 +2,8 @@
   "name": "@red-pill/atlas-api-react",
   "version": "0.0.1",
   "dependencies": {
-    "@red-pill/atlas-api-js": "workspace:*"
+    "@red-pill/atlas-api-js": "workspace:*",
+    "@red-pill/atlas-proto": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.3.1",
