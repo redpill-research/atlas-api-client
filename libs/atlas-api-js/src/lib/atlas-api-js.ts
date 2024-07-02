@@ -1,13 +1,27 @@
 import { Message } from '@bufbuild/protobuf';
 import {
+  Country,
   GetCountriesRequest,
   GetCountriesResponse,
-  // GetProductsByCountryRequest,
-  // GetProductsByCountryResponse,
+  GetProductsByCountryRequest,
+  GetProductsByCountryResponse,
+  Product,
 } from '@red-pill/atlas-proto';
 
-export function createAtlasApiClient({ baseUrl }: { baseUrl: string }) {
-  console.log('createAtlasApiClient', { baseUrl });
+export interface AtlasApiClient {
+  getCountries: (
+    data: Partial<GetCountriesRequest>
+  ) => Promise<{ countries: Country[] }>;
+  getProductsByCountry: (
+    data: Partial<GetProductsByCountryRequest>
+  ) => Promise<{ products: Product[] }>;
+}
+
+export function createAtlasApiClient({
+  baseUrl,
+}: {
+  baseUrl: string;
+}): AtlasApiClient {
   async function postRequest<T extends Message>(
     endpoint: string,
     request: T
@@ -28,7 +42,7 @@ export function createAtlasApiClient({ baseUrl }: { baseUrl: string }) {
   }
 
   return {
-    getCountries: async (data: Partial<GetCountriesRequest>) => {
+    getCountries: async (data) => {
       try {
         const requestData = new GetCountriesRequest(data);
         const response = await postRequest('/api/v1/countries', requestData);
@@ -36,34 +50,32 @@ export function createAtlasApiClient({ baseUrl }: { baseUrl: string }) {
         const responseMessage = GetCountriesResponse.fromBinary(
           new Uint8Array(responseData)
         );
-        return responseMessage.toJson();
+        return responseMessage.toJson() as unknown as {
+          countries: Country[];
+        };
       } catch (error) {
         console.error('Error fetching countries:', error);
         throw error;
       }
     },
-    // getProductsByCountry: async (
-    //   data: Partial<GetProductsByCountryRequest>
-    // ) => {
-    //   const requestData = new GetProductsByCountryRequest(data);
-
-    //   try {
-    //     const response = await postRequest<GetProductsByCountryRequest>(
-    //       '/api/v1/products',
-    //       requestData
-    //     );
-    //     const responseData = await response.arrayBuffer();
-    //     const responseMessage = GetProductsByCountryResponse.fromBinary(
-    //       new Uint8Array(responseData)
-    //     );
-    //     return responseMessage.toJson();
-    //   } catch (error) {
-    //     console.error('Error fetching products for country:', error);
-    //     throw error;
-    //   }
-    // },
+    getProductsByCountry: async (data) => {
+      try {
+        const requestData = new GetProductsByCountryRequest(data);
+        const response = await postRequest<GetProductsByCountryRequest>(
+          '/api/v1/products',
+          requestData
+        );
+        const responseData = await response.arrayBuffer();
+        const responseMessage = GetProductsByCountryResponse.fromBinary(
+          new Uint8Array(responseData)
+        );
+        return responseMessage.toJson() as unknown as {
+          products: Product[];
+        };
+      } catch (error) {
+        console.error('Error fetching products for country:', error);
+        throw error;
+      }
+    },
   };
 }
-
-// const baseUrl = 'https://api.atls.rs';
-// const atlasApiClient = createAtlasApiClient({ baseUrl });
