@@ -38,7 +38,8 @@ jobs:
         shell: bash
 
       - name: Release packages
-        run: pnpm exec nx release
+        run: pnpm exec nx release --verbose
         shell: bash
         env:
           NPM_CONFIG_PROVENANCE: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
