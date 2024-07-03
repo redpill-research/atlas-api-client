@@ -6,7 +6,7 @@ export function useGetCountries(data: Partial<GetCountriesRequest>) {
   const { getCountries } = useAtlasApiClient();
 
   return useQuery({
-    queryKey: ['getCountries'],
+    queryKey: ['countries'],
     queryFn: async () => {
       const response = await getCountries(data);
 
