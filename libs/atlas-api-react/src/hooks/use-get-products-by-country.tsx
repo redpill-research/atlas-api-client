@@ -11,9 +11,7 @@ export function useGetProductsByCountry({
     queryKey: ['product-by-country', countryId],
     enabled: !!countryId && countryId.length > 0,
     queryFn: async () => {
-      const response = await getProductsByCountry({ countryId });
-
-      return response.products;
+      return await getProductsByCountry({ countryId });
     },
   });
 }

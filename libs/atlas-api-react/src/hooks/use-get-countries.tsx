@@ -8,9 +8,7 @@ export function useGetCountries(data: Partial<GetCountriesRequest>) {
   return useQuery({
     queryKey: ['countries'],
     queryFn: async () => {
-      const response = await getCountries(data);
-
-      return response.countries;
+      return await getCountries(data);
     },
   });
 }
