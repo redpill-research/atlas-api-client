@@ -1,3 +1,20 @@
+## 0.8.0 (2024-07-03)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** add auth handlers ([4657a1f](https://github.com/redpill-research/atlas-js-client/commit/4657a1f))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.8.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.7.5 (2024-07-02)
 
 ### 🧱 Updated Dependencies

@@ -1,3 +1,15 @@
+## 0.8.0 (2024-07-03)
+
+
+### 🚀 Features
+
+- **atlas-proto:** regenerate from fresh protofiles ([c9cbe87](https://github.com/redpill-research/atlas-js-client/commit/c9cbe87))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.7.5 (2024-07-02)
 
 This was a version bump only for atlas-proto to align it with other projects, there were no code changes.

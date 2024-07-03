@@ -1,8 +1,8 @@
 {
   "name": "@red-pill/atlas-api-js",
-  "version": "0.7.5",
+  "version": "0.8.0",
   "dependencies": {
-    "@red-pill/atlas-proto": "0.7.5"
+    "@red-pill/atlas-proto": "0.8.0"
   },
   "publishConfig": {
     "access": "public"
