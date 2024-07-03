@@ -6,15 +6,25 @@ import {
   GetProductsByCountryRequest,
   GetProductsByCountryResponse,
   Product,
+  AuthStartRequest,
+  AuthStartResponse,
+  AuthConfirmRequest,
+  AuthConfirmResponse,
 } from '@red-pill/atlas-proto';
 
 export interface AtlasApiClient {
   getCountries: (
-    data: Partial<GetCountriesRequest>
+    data: Partial<GetCountriesRequest>,
   ) => Promise<{ countries: Country[] }>;
   getProductsByCountry: (
-    data: Partial<GetProductsByCountryRequest>
+    data: Partial<GetProductsByCountryRequest>,
   ) => Promise<{ products: Product[] }>;
+  authStart: (
+    data: Partial<AuthStartRequest>,
+  ) => Promise<{ authId: string; messageForSign: string }>;
+  authConfirm: (
+    data: Partial<AuthConfirmRequest>,
+  ) => Promise<{ sessionToken: string }>;
 }
 
 export function createAtlasApiClient({
@@ -24,13 +34,15 @@ export function createAtlasApiClient({
 }): AtlasApiClient {
   async function postRequest<T extends Message>(
     endpoint: string,
-    request: T
+    request: T,
   ): Promise<Response> {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/x-protobuf',
+    };
+
     const response = await fetch(new URL(endpoint, baseUrl), {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-protobuf',
-      },
+      headers,
       body: request.toBinary(),
     });
 
@@ -42,17 +54,46 @@ export function createAtlasApiClient({
   }
 
   return {
+    // Auth
+    authStart: async (data) => {
+      try {
+        const requestData = new AuthStartRequest(data);
+        const response = await postRequest('/api/v1/auth/start', requestData);
+        const responseData = await response.arrayBuffer();
+        const { authId, messageForSign } = AuthStartResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return { authId, messageForSign };
+      } catch (error) {
+        console.error('Error starting authentication:', error);
+        throw error;
+      }
+    },
+    authConfirm: async (data) => {
+      try {
+        const requestData = new AuthConfirmRequest(data);
+        const response = await postRequest('/api/v1/auth/confirm', requestData);
+        const responseData = await response.arrayBuffer();
+        const { sessionToken } = AuthConfirmResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return { sessionToken };
+      } catch (error) {
+        console.error('Error confirming authentication:', error);
+        throw error;
+      }
+    },
+
+    // Public API
     getCountries: async (data) => {
       try {
         const requestData = new GetCountriesRequest(data);
         const response = await postRequest('/api/v1/countries', requestData);
         const responseData = await response.arrayBuffer();
-        const responseMessage = GetCountriesResponse.fromBinary(
-          new Uint8Array(responseData)
+        const { countries } = GetCountriesResponse.fromBinary(
+          new Uint8Array(responseData),
         );
-        return responseMessage.toJson() as unknown as {
-          countries: Country[];
-        };
+        return { countries };
       } catch (error) {
         console.error('Error fetching countries:', error);
         throw error;
@@ -61,17 +102,12 @@ export function createAtlasApiClient({
     getProductsByCountry: async (data) => {
       try {
         const requestData = new GetProductsByCountryRequest(data);
-        const response = await postRequest<GetProductsByCountryRequest>(
-          '/api/v1/products',
-          requestData
-        );
+        const response = await postRequest('/api/v1/products', requestData);
         const responseData = await response.arrayBuffer();
-        const responseMessage = GetProductsByCountryResponse.fromBinary(
-          new Uint8Array(responseData)
+        const { products } = GetProductsByCountryResponse.fromBinary(
+          new Uint8Array(responseData),
         );
-        return responseMessage.toJson() as unknown as {
-          products: Product[];
-        };
+        return { products };
       } catch (error) {
         console.error('Error fetching products for country:', error);
         throw error;
