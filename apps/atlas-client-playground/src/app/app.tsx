@@ -1,14 +1,16 @@
-import { AtlasApiProvider } from '@red-pill/atlas-api-react';
+import { useState } from 'react';
 import { Header } from '../components/header';
 import { Heading } from '../components/heading';
 import { DayIcon, NightIcon } from '../components/icons';
+import { Input } from '../components/input';
 import { Container, Page } from '../components/layout';
 import { useThemeToggle } from '../hooks/use-theme-toggle';
 import {
-  AtlasClientPlayground,
+  AtlasAuth,
   AtlasGetCountries,
   AtlasGetProductsByCountries,
 } from './atlas-client-playground';
+import { AppProviders } from '../providers';
 
 function RightSlot() {
   const [theme, toggleTheme] = useThemeToggle();
@@ -28,21 +30,34 @@ function RightSlot() {
   );
 }
 
-function App() {
+export function App() {
+  const [apiEndpoint, setApiEndpoint] = useState<string>('https://api.atls.rs');
+
   return (
     <Page header={<Header rightSlot={<RightSlot />} />}>
       <Container className="py-6 md:py-8 lg:py-12">
         <Heading level={1} className="uppercase">
-          Atlas Protocat Client Lab
+          Atlas API Client Playground
         </Heading>
 
-        <div className="grid md:grid-cols-2 gap-6 my-6">
-          <AtlasGetCountries />
-          <AtlasGetProductsByCountries />
+        <div>
+          <Input
+            placeholder="countryId"
+            value={apiEndpoint}
+            onChange={(event) => {
+              setApiEndpoint(event.currentTarget.value);
+            }}
+          />
         </div>
+
+        <AppProviders baseUrl={apiEndpoint}>
+          <div className="grid md:grid-cols-2 gap-6 my-6">
+            <AtlasGetCountries />
+            <AtlasGetProductsByCountries />
+            <AtlasAuth />
+          </div>
+        </AppProviders>
       </Container>
     </Page>
   );
 }
-
-export default App;
