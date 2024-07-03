@@ -40,10 +40,15 @@ export function createAtlasApiClient({
   async function postRequest<T extends Message>(
     endpoint: string,
     request: T,
+    authToken?: string,
   ): Promise<Response> {
     const headers: HeadersInit = {
       'Content-Type': 'application/x-protobuf',
     };
+
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
+    }
 
     const response = await fetch(new URL(endpoint, baseUrl), {
       method: 'POST',
