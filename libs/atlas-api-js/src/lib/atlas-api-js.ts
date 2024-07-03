@@ -15,7 +15,7 @@ import {
 export interface AtlasApiClient {
   getCountries: (
     data: Partial<GetCountriesRequest>,
-  ) => Promise<{ countries: Country[] }>;
+  ) => Promise<{ countries: Country[]; preferredCountry?: Country }>;
   getProductsByCountry: (
     data: Partial<GetProductsByCountryRequest>,
   ) => Promise<{ products: Product[] }>;
@@ -90,10 +90,10 @@ export function createAtlasApiClient({
         const requestData = new GetCountriesRequest(data);
         const response = await postRequest('/api/v1/countries', requestData);
         const responseData = await response.arrayBuffer();
-        const { countries } = GetCountriesResponse.fromBinary(
+        const { countries, preferredCountry } = GetCountriesResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { countries };
+        return { countries, preferredCountry };
       } catch (error) {
         console.error('Error fetching countries:', error);
         throw error;
