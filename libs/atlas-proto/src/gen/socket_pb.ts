@@ -3,15 +3,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type {
-  BinaryReadOptions,
-  FieldList,
-  JsonReadOptions,
-  JsonValue,
-  PartialMessage,
-  PlainMessage,
-} from '@bufbuild/protobuf';
-import { Message, proto3 } from '@bufbuild/protobuf';
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
  * @generated from enum socket.SocketEventType
@@ -47,12 +40,12 @@ export enum SocketEventType {
   PURCHASE_RESULT = 4,
 }
 // Retrieve enum metadata with: proto3.getEnumType(SocketEventType)
-proto3.util.setEnumType(SocketEventType, 'socket.SocketEventType', [
-  { no: 0, name: 'SOCKET_EVENT_TYPE_UNSPECIFIED' },
-  { no: 1, name: 'SOCKET_EVENT_TYPE_CONNECT' },
-  { no: 2, name: 'SOCKET_EVENT_TYPE_DISCONNECT' },
-  { no: 3, name: 'SOCKET_EVENT_TYPE_PING' },
-  { no: 4, name: 'SOCKET_EVENT_TYPE_PURCHASE_RESULT' },
+proto3.util.setEnumType(SocketEventType, "socket.SocketEventType", [
+  { no: 0, name: "SOCKET_EVENT_TYPE_UNSPECIFIED" },
+  { no: 1, name: "SOCKET_EVENT_TYPE_CONNECT" },
+  { no: 2, name: "SOCKET_EVENT_TYPE_DISCONNECT" },
+  { no: 3, name: "SOCKET_EVENT_TYPE_PING" },
+  { no: 4, name: "SOCKET_EVENT_TYPE_PURCHASE_RESULT" },
 ]);
 
 /**
@@ -72,41 +65,25 @@ export class SocketEvent extends Message<SocketEvent> {
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = 'socket.SocketEvent';
+  static readonly typeName = "socket.SocketEvent";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    {
-      no: 1,
-      name: 'event_type',
-      kind: 'enum',
-      T: proto3.getEnumType(SocketEventType),
-    },
+    { no: 1, name: "event_type", kind: "enum", T: proto3.getEnumType(SocketEventType) },
   ]);
 
-  static fromBinary(
-    bytes: Uint8Array,
-    options?: Partial<BinaryReadOptions>,
-  ): SocketEvent {
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SocketEvent {
     return new SocketEvent().fromBinary(bytes, options);
   }
 
-  static fromJson(
-    jsonValue: JsonValue,
-    options?: Partial<JsonReadOptions>,
-  ): SocketEvent {
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SocketEvent {
     return new SocketEvent().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(
-    jsonString: string,
-    options?: Partial<JsonReadOptions>,
-  ): SocketEvent {
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SocketEvent {
     return new SocketEvent().fromJsonString(jsonString, options);
   }
 
-  static equals(
-    a: SocketEvent | PlainMessage<SocketEvent> | undefined,
-    b: SocketEvent | PlainMessage<SocketEvent> | undefined,
-  ): boolean {
+  static equals(a: SocketEvent | PlainMessage<SocketEvent> | undefined, b: SocketEvent | PlainMessage<SocketEvent> | undefined): boolean {
     return proto3.util.equals(SocketEvent, a, b);
   }
 }
+

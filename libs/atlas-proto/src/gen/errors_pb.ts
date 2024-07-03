@@ -3,15 +3,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type {
-  BinaryReadOptions,
-  FieldList,
-  JsonReadOptions,
-  JsonValue,
-  PartialMessage,
-  PlainMessage,
-} from '@bufbuild/protobuf';
-import { Message, proto3 } from '@bufbuild/protobuf';
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
  * @generated from enum errors.ErrorTypes
@@ -48,13 +41,13 @@ export enum ErrorTypes {
   INTERNAL = 5,
 }
 // Retrieve enum metadata with: proto3.getEnumType(ErrorTypes)
-proto3.util.setEnumType(ErrorTypes, 'errors.ErrorTypes', [
-  { no: 0, name: 'UNKNOWN' },
-  { no: 1, name: 'INVALID_ARGUMENT' },
-  { no: 2, name: 'INVALID_PAYLOAD' },
-  { no: 3, name: 'UNAUTHENTICATED' },
-  { no: 4, name: 'UNIMPLEMENTED' },
-  { no: 5, name: 'INTERNAL' },
+proto3.util.setEnumType(ErrorTypes, "errors.ErrorTypes", [
+  { no: 0, name: "UNKNOWN" },
+  { no: 1, name: "INVALID_ARGUMENT" },
+  { no: 2, name: "INVALID_PAYLOAD" },
+  { no: 3, name: "UNAUTHENTICATED" },
+  { no: 4, name: "UNIMPLEMENTED" },
+  { no: 5, name: "INTERNAL" },
 ]);
 
 /**
@@ -69,7 +62,7 @@ export class ApiError extends Message<ApiError> {
   /**
    * @generated from field: string message = 2;
    */
-  message = '';
+  message = "";
 
   constructor(data?: PartialMessage<ApiError>) {
     super();
@@ -77,37 +70,26 @@ export class ApiError extends Message<ApiError> {
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = 'errors.ApiError';
+  static readonly typeName = "errors.ApiError";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: 'type', kind: 'enum', T: proto3.getEnumType(ErrorTypes) },
-    { no: 2, name: 'message', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(ErrorTypes) },
+    { no: 2, name: "message", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(
-    bytes: Uint8Array,
-    options?: Partial<BinaryReadOptions>,
-  ): ApiError {
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ApiError {
     return new ApiError().fromBinary(bytes, options);
   }
 
-  static fromJson(
-    jsonValue: JsonValue,
-    options?: Partial<JsonReadOptions>,
-  ): ApiError {
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ApiError {
     return new ApiError().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(
-    jsonString: string,
-    options?: Partial<JsonReadOptions>,
-  ): ApiError {
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApiError {
     return new ApiError().fromJsonString(jsonString, options);
   }
 
-  static equals(
-    a: ApiError | PlainMessage<ApiError> | undefined,
-    b: ApiError | PlainMessage<ApiError> | undefined,
-  ): boolean {
+  static equals(a: ApiError | PlainMessage<ApiError> | undefined, b: ApiError | PlainMessage<ApiError> | undefined): boolean {
     return proto3.util.equals(ApiError, a, b);
   }
 }
+
