@@ -23,7 +23,7 @@ export function useAtlasApiClient() {
 
   if (!client) {
     throw new Error(
-      'useAtlasApiClient must be used within an AtlasApiProvider'
+      'useAtlasApiClient must be used within an AtlasApiProvider',
     );
   }
 

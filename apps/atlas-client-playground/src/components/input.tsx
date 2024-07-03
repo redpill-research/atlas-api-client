@@ -5,8 +5,8 @@ import {
   ReactNode,
   Ref,
   useCallback,
-} from "react";
-import clsx from "clsx";
+} from 'react';
+import clsx from 'clsx';
 
 export function InputLabel({
   label,
@@ -23,8 +23,8 @@ export function InputLabel({
     <label
       htmlFor={id}
       className={clsx(
-        "flex items-center gap-2",
-        disabled && "cursor-not-allowed"
+        'flex items-center gap-2',
+        disabled && 'cursor-not-allowed',
       )}
     >
       {label}
@@ -47,9 +47,9 @@ export function InputSlot({
   return (
     <div
       className={clsx(
-        "flex items-center justify-center",
-        error && "[&>*]:text-text-red-1",
-        disabled && "cursor-not-allowed"
+        'flex items-center justify-center',
+        error && '[&>*]:text-text-red-1',
+        disabled && 'cursor-not-allowed',
       )}
     >
       {slot}
@@ -57,7 +57,7 @@ export function InputSlot({
   );
 }
 
-type InputType = "text" | "email" | "number";
+type InputType = 'text' | 'email' | 'number';
 
 export type InputOnChange = (event: ChangeEvent<HTMLInputElement>) => void;
 
@@ -109,7 +109,7 @@ export const Input = forwardRef(
       autoFocus,
       ...rest
     }: AdditionalInputProps<T>,
-    ref: Ref<HTMLInputElement>
+    ref: Ref<HTMLInputElement>,
   ) => {
     const handleChange = useCallback(
       (event: ChangeEvent<HTMLInputElement>) => {
@@ -117,16 +117,16 @@ export const Input = forwardRef(
           onChange(event);
         }
       },
-      [onChange]
+      [onChange],
     );
 
     return (
       <div
         className={clsx(
-          "flex w-full flex-col gap-y-1",
-          "text-text-base-1 text-base font-medium leading-[22px] [&>*]:text-base [&>*]:font-medium [&>*]:leading-[22px]",
-          disabled && "cursor-not-allowed",
-          className
+          'flex w-full flex-col gap-y-1',
+          'text-text-base-1 text-base font-medium leading-[22px] [&>*]:text-base [&>*]:font-medium [&>*]:leading-[22px]',
+          disabled && 'cursor-not-allowed',
+          className,
         )}
       >
         {label && (
@@ -139,9 +139,9 @@ export const Input = forwardRef(
         )}
         <div
           className={clsx(
-            "bg-bg-1 border-graphic-second-2 focus-within:bg-graphic-second-3 flex w-full flex-row items-center gap-x-2 rounded-md border px-3 py-2 transition-colors duration-200",
-            error && "border-graphic-red-1",
-            inputContainerClassName
+            'bg-bg-1 border-graphic-second-2 focus-within:bg-graphic-second-3 flex w-full flex-row items-center gap-x-2 rounded-md border px-3 py-2 transition-colors duration-200',
+            error && 'border-graphic-red-1',
+            inputContainerClassName,
           )}
         >
           {leftSlot && (
@@ -162,10 +162,10 @@ export const Input = forwardRef(
             ref={ref}
             autoFocus={autoFocus}
             className={clsx(
-              "placeholder-text-base-2 w-full flex-1 bg-transparent outline-none transition-colors duration-200",
-              error && "text-text-red-1",
-              disabled && "cursor-not-allowed",
-              inputClassName
+              'placeholder-text-base-2 w-full flex-1 bg-transparent outline-none transition-colors duration-200',
+              error && 'text-text-red-1',
+              disabled && 'cursor-not-allowed',
+              inputClassName,
             )}
             {...rest}
           />
@@ -179,5 +179,5 @@ export const Input = forwardRef(
         {hint && hint}
       </div>
     );
-  }
+  },
 );

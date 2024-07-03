@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
 export function SpinnerLoader({
   className,
@@ -15,7 +15,7 @@ export function SpinnerLoader({
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={clsx("animate-spin", className)}
+        className={clsx('animate-spin', className)}
       >
         <circle
           cx="8"

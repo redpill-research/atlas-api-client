@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
 export function CardIcon({ className }: { className?: string }) {
   return (
@@ -8,7 +8,7 @@ export function CardIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={clsx("text-text-base-1", className)}
+      className={clsx('text-text-base-1', className)}
     >
       <path
         fillRule="evenodd"

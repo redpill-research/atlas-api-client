@@ -3,8 +3,15 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3 } from "@bufbuild/protobuf";
+import type {
+  BinaryReadOptions,
+  FieldList,
+  JsonReadOptions,
+  JsonValue,
+  PartialMessage,
+  PlainMessage,
+} from '@bufbuild/protobuf';
+import { Message, proto3 } from '@bufbuild/protobuf';
 
 /**
  * @generated from message models.Country
@@ -13,12 +20,12 @@ export class Country extends Message<Country> {
   /**
    * @generated from field: string id = 1;
    */
-  id = "";
+  id = '';
 
   /**
    * @generated from field: string name = 2;
    */
-  name = "";
+  name = '';
 
   /**
    * @generated from field: optional string flag_url = 3;
@@ -31,26 +38,44 @@ export class Country extends Message<Country> {
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "models.Country";
+  static readonly typeName = 'models.Country';
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "flag_url", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    {
+      no: 3,
+      name: 'flag_url',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      opt: true,
+    },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Country {
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>,
+  ): Country {
     return new Country().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Country {
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>,
+  ): Country {
     return new Country().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Country {
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>,
+  ): Country {
     return new Country().fromJsonString(jsonString, options);
   }
 
-  static equals(a: Country | PlainMessage<Country> | undefined, b: Country | PlainMessage<Country> | undefined): boolean {
+  static equals(
+    a: Country | PlainMessage<Country> | undefined,
+    b: Country | PlainMessage<Country> | undefined,
+  ): boolean {
     return proto3.util.equals(Country, a, b);
   }
 }
@@ -67,12 +92,12 @@ export class Currency extends Message<Currency> {
   /**
    * @generated from field: string symbol = 2;
    */
-  symbol = "";
+  symbol = '';
 
   /**
    * @generated from field: string name = 3;
    */
-  name = "";
+  name = '';
 
   constructor(data?: PartialMessage<Currency>) {
     super();
@@ -80,26 +105,38 @@ export class Currency extends Message<Currency> {
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "models.Currency";
+  static readonly typeName = 'models.Currency';
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "numeric_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 2, name: "symbol", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: 'numeric_id', kind: 'scalar', T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: 'symbol', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Currency {
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>,
+  ): Currency {
     return new Currency().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Currency {
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>,
+  ): Currency {
     return new Currency().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Currency {
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>,
+  ): Currency {
     return new Currency().fromJsonString(jsonString, options);
   }
 
-  static equals(a: Currency | PlainMessage<Currency> | undefined, b: Currency | PlainMessage<Currency> | undefined): boolean {
+  static equals(
+    a: Currency | PlainMessage<Currency> | undefined,
+    b: Currency | PlainMessage<Currency> | undefined,
+  ): boolean {
     return proto3.util.equals(Currency, a, b);
   }
 }
@@ -124,25 +161,37 @@ export class ProductValueRange extends Message<ProductValueRange> {
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "models.ProductValueRange";
+  static readonly typeName = 'models.ProductValueRange';
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "min", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
-    { no: 2, name: "max", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 1, name: 'min', kind: 'scalar', T: 1 /* ScalarType.DOUBLE */ },
+    { no: 2, name: 'max', kind: 'scalar', T: 1 /* ScalarType.DOUBLE */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ProductValueRange {
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>,
+  ): ProductValueRange {
     return new ProductValueRange().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ProductValueRange {
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>,
+  ): ProductValueRange {
     return new ProductValueRange().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ProductValueRange {
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>,
+  ): ProductValueRange {
     return new ProductValueRange().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ProductValueRange | PlainMessage<ProductValueRange> | undefined, b: ProductValueRange | PlainMessage<ProductValueRange> | undefined): boolean {
+  static equals(
+    a: ProductValueRange | PlainMessage<ProductValueRange> | undefined,
+    b: ProductValueRange | PlainMessage<ProductValueRange> | undefined,
+  ): boolean {
     return proto3.util.equals(ProductValueRange, a, b);
   }
 }
@@ -154,17 +203,17 @@ export class Product extends Message<Product> {
   /**
    * @generated from field: string id = 1;
    */
-  id = "";
+  id = '';
 
   /**
    * @generated from field: string name = 2;
    */
-  name = "";
+  name = '';
 
   /**
    * @generated from field: string country_id = 3;
    */
-  countryId = "";
+  countryId = '';
 
   /**
    * @generated from field: models.Currency currency = 4;
@@ -184,7 +233,7 @@ export class Product extends Message<Product> {
   /**
    * @generated from field: string image = 7;
    */
-  image = "";
+  image = '';
 
   /**
    * @generated from field: optional string description = 8;
@@ -207,33 +256,69 @@ export class Product extends Message<Product> {
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "models.Product";
+  static readonly typeName = 'models.Product';
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "country_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "currency", kind: "message", T: Currency },
-    { no: 5, name: "denominations", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, repeated: true },
-    { no: 6, name: "value_range", kind: "message", T: ProductValueRange },
-    { no: 7, name: "image", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 8, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 9, name: "terms_and_conditions", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 10, name: "instructions", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: 'country_id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: 'currency', kind: 'message', T: Currency },
+    {
+      no: 5,
+      name: 'denominations',
+      kind: 'scalar',
+      T: 1 /* ScalarType.DOUBLE */,
+      repeated: true,
+    },
+    { no: 6, name: 'value_range', kind: 'message', T: ProductValueRange },
+    { no: 7, name: 'image', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    {
+      no: 8,
+      name: 'description',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      opt: true,
+    },
+    {
+      no: 9,
+      name: 'terms_and_conditions',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      opt: true,
+    },
+    {
+      no: 10,
+      name: 'instructions',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      opt: true,
+    },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Product {
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>,
+  ): Product {
     return new Product().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Product {
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>,
+  ): Product {
     return new Product().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Product {
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>,
+  ): Product {
     return new Product().fromJsonString(jsonString, options);
   }
 
-  static equals(a: Product | PlainMessage<Product> | undefined, b: Product | PlainMessage<Product> | undefined): boolean {
+  static equals(
+    a: Product | PlainMessage<Product> | undefined,
+    b: Product | PlainMessage<Product> | undefined,
+  ): boolean {
     return proto3.util.equals(Product, a, b);
   }
 }
@@ -245,7 +330,7 @@ export class InviteCode extends Message<InviteCode> {
   /**
    * @generated from field: string code = 1;
    */
-  code = "";
+  code = '';
 
   /**
    * @generated from field: bool is_used = 2;
@@ -258,26 +343,37 @@ export class InviteCode extends Message<InviteCode> {
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "models.InviteCode";
+  static readonly typeName = 'models.InviteCode';
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "is_used", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 1, name: 'code', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: 'is_used', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): InviteCode {
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>,
+  ): InviteCode {
     return new InviteCode().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): InviteCode {
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>,
+  ): InviteCode {
     return new InviteCode().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InviteCode {
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>,
+  ): InviteCode {
     return new InviteCode().fromJsonString(jsonString, options);
   }
 
-  static equals(a: InviteCode | PlainMessage<InviteCode> | undefined, b: InviteCode | PlainMessage<InviteCode> | undefined): boolean {
+  static equals(
+    a: InviteCode | PlainMessage<InviteCode> | undefined,
+    b: InviteCode | PlainMessage<InviteCode> | undefined,
+  ): boolean {
     return proto3.util.equals(InviteCode, a, b);
   }
 }
-

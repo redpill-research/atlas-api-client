@@ -26,5 +26,5 @@ module.exports = withNx(
         limit: 10000, // 10kB
       }),
     ],
-  }
+  },
 );
