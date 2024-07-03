@@ -1,3 +1,15 @@
+## 0.8.1 (2024-07-03)
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** return untouched data from js api in hooks ([35df84e](https://github.com/redpill-research/atlas-js-client/commit/35df84e))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.8.0 (2024-07-03)
 
 
