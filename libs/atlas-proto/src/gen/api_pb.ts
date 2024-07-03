@@ -207,6 +207,11 @@ export class GetCountriesResponse extends Message<GetCountriesResponse> {
    */
   countries: Country[] = [];
 
+  /**
+   * @generated from field: models.Country preferred_country = 2;
+   */
+  preferredCountry?: Country;
+
   constructor(data?: PartialMessage<GetCountriesResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -216,6 +221,7 @@ export class GetCountriesResponse extends Message<GetCountriesResponse> {
   static readonly typeName = "api.GetCountriesResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "countries", kind: "message", T: Country, repeated: true },
+    { no: 2, name: "preferred_country", kind: "message", T: Country },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetCountriesResponse {
@@ -453,9 +459,9 @@ export class GetReferralInfoRequest extends Message<GetReferralInfoRequest> {
  */
 export class GetReferralInfoResponse extends Message<GetReferralInfoResponse> {
   /**
-   * @generated from field: int32 avalible_count = 1;
+   * @generated from field: int32 available_count = 1;
    */
-  avalibleCount = 0;
+  availableCount = 0;
 
   /**
    * @generated from field: repeated models.InviteCode generated_codes = 2;
@@ -475,7 +481,7 @@ export class GetReferralInfoResponse extends Message<GetReferralInfoResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "api.GetReferralInfoResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "avalible_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 1, name: "available_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "generated_codes", kind: "message", T: InviteCode, repeated: true },
     { no: 3, name: "invited_addresses", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ]);
