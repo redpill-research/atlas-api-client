@@ -12,6 +12,13 @@ import {
   AuthConfirmResponse,
   GetProductByIdRequest,
   GetProductByIdResponse,
+  InviteCode,
+  GetReferralInfoRequest,
+  GetReferralInfoResponse,
+  SendInviteRequest,
+  SendInviteResponse,
+  GenerateInviteCodeRequest,
+  GenerateInviteCodeResponse,
 } from '@red-pill/atlas-proto';
 
 export interface AtlasApiClient {
@@ -30,6 +37,22 @@ export interface AtlasApiClient {
   authConfirm: (
     data: Partial<AuthConfirmRequest>,
   ) => Promise<{ sessionToken: string }>;
+  getReferralInfo: (
+    data: Partial<GetReferralInfoRequest>,
+    authToken: string,
+  ) => Promise<{
+    availableCount: number;
+    invitedAddresses: string[];
+    generatedCodes: InviteCode[];
+  }>;
+  sendInvite: (
+    data: Partial<SendInviteRequest>,
+    authToken: string,
+  ) => Promise<{ tx: string }>;
+  generateInviteCode: (
+    data: Partial<GenerateInviteCodeRequest>,
+    authToken: string,
+  ) => Promise<{ code: string }>;
 }
 
 export function createAtlasApiClient({
@@ -137,6 +160,62 @@ export function createAtlasApiClient({
         return { product };
       } catch (error) {
         console.error('Error fetching products for country:', error);
+        throw error;
+      }
+    },
+
+    // Private API
+    getReferralInfo: async (data, authToken) => {
+      try {
+        const requestData = new GetReferralInfoRequest(data);
+        const response = await postRequest(
+          '/api/v1/referral/info',
+          requestData,
+          authToken,
+        );
+        const responseData = await response.arrayBuffer();
+        const { generatedCodes, availableCount, invitedAddresses } =
+          GetReferralInfoResponse.fromBinary(new Uint8Array(responseData));
+
+        return { generatedCodes, availableCount, invitedAddresses };
+      } catch (error) {
+        console.error('Error fetching referral info:', error);
+        throw error;
+      }
+    },
+    sendInvite: async (data, authToken) => {
+      try {
+        const requestData = new SendInviteRequest(data);
+        const response = await postRequest(
+          '/api/v1/referral/send_invite',
+          requestData,
+          authToken,
+        );
+        const responseData = await response.arrayBuffer();
+        const { tx } = SendInviteResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return { tx };
+      } catch (error) {
+        console.error('Error sending invite:', error);
+        throw error;
+      }
+    },
+    generateInviteCode: async (data, authToken) => {
+      try {
+        const requestData = new GenerateInviteCodeRequest(data);
+        const response = await postRequest(
+          '/api/v1/referral/generate_code',
+          requestData,
+          authToken,
+        );
+        const responseData = await response.arrayBuffer();
+        const { code } = GenerateInviteCodeResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return { code };
+      } catch (error) {
+        console.error('Error generating invite code:', error);
         throw error;
       }
     },
