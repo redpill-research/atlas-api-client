@@ -1,6 +1,6 @@
 {
   "name": "@red-pill/atlas-api-js",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "dependencies": {
     "@red-pill/atlas-proto": "0.8.0"
   },

@@ -1,3 +1,15 @@
+## 0.8.1 (2024-07-03)
+
+
+### 🩹 Fixes
+
+- **atlas-api-js:** return preferredCountry from  getCountries response ([2a1c974](https://github.com/redpill-research/atlas-js-client/commit/2a1c974))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.8.0 (2024-07-03)
 
 

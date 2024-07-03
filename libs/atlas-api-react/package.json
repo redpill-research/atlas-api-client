@@ -2,7 +2,7 @@
   "name": "@red-pill/atlas-api-react",
   "version": "0.8.0",
   "dependencies": {
-    "@red-pill/atlas-api-js": "0.8.0",
+    "@red-pill/atlas-api-js": "0.8.1",
     "@red-pill/atlas-proto": "0.8.0"
   },
   "peerDependencies": {
