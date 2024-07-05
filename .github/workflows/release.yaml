@@ -41,16 +41,14 @@ jobs:
         run: pnpm exec nx run-many -t build --verbose
         shell: bash
 
-      ####################
-      # DISABLED FOR NOW #
-      ####################
-      # - name: Release packages
-      #   run: pnpm exec nx release --verbose
-      #   shell: bash
-      #   env:
-      #     NPM_CONFIG_PROVENANCE: true
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-      #     GIT_AUTHOR_NAME: redpill-ci
-      #     GIT_AUTHOR_EMAIL: redpill-ci@redpill.ventures
-      #     GIT_COMMITTER_NAME: redpill-ci
-      #     GIT_COMMITTER_EMAIL: redpill-ci@redpill.ventures
+      # TODO: Need to add PAT token to puhs releases to git
+      - name: Release packages
+        run: pnpm exec nx release --verbose
+        shell: bash
+        env:
+          NPM_CONFIG_PROVENANCE: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+          GIT_AUTHOR_NAME: redpill-ci
+          GIT_AUTHOR_EMAIL: redpill-ci@redpill.ventures
+          GIT_COMMITTER_NAME: redpill-ci
+          GIT_COMMITTER_EMAIL: redpill-ci@redpill.ventures
