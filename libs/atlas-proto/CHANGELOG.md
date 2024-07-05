@@ -1,3 +1,15 @@
+## 0.9.0 (2024-07-05)
+
+
+### 🚀 Features
+
+- **atlas-proto:** regenerate proto lib with latest versions of proto structures ([b3aa3ec](https://github.com/redpill-research/atlas-js-client/commit/b3aa3ec))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.8.0 (2024-07-03)
 
 

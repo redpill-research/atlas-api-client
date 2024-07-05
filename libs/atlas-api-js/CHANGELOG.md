@@ -1,3 +1,20 @@
+## 0.9.0 (2024-07-05)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** add method to request product data by id ([9f208f2](https://github.com/redpill-research/atlas-js-client/commit/9f208f2))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.9.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.8.1 (2024-07-03)
 
 

@@ -1,3 +1,23 @@
+## 0.8.2 (2024-07-05)
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** remove auth provider ([6530948](https://github.com/redpill-research/atlas-js-client/commit/6530948))
+
+- **atlas-api-client:** change products by country query key ([c3f2025](https://github.com/redpill-research/atlas-js-client/commit/c3f2025))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.9.0
+- Updated atlas-api-js to 0.9.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.8.1 (2024-07-03)
 
 
