@@ -10,6 +10,8 @@ import {
   AuthStartResponse,
   AuthConfirmRequest,
   AuthConfirmResponse,
+  GetProductByIdRequest,
+  GetProductByIdResponse,
 } from '@red-pill/atlas-proto';
 
 export interface AtlasApiClient {
@@ -19,6 +21,9 @@ export interface AtlasApiClient {
   getProductsByCountry: (
     data: Partial<GetProductsByCountryRequest>,
   ) => Promise<{ products: Product[] }>;
+  getProductsById: (
+    data: Partial<GetProductByIdRequest>,
+  ) => Promise<{ product: Product | undefined }>;
   authStart: (
     data: Partial<AuthStartRequest>,
   ) => Promise<{ authId: string; messageForSign: string }>;
@@ -108,6 +113,23 @@ export function createAtlasApiClient({
           new Uint8Array(responseData),
         );
         return { products };
+      } catch (error) {
+        console.error('Error fetching products for country:', error);
+        throw error;
+      }
+    },
+    getProductsById: async (data) => {
+      try {
+        const requestData = new GetProductByIdRequest(data);
+        const response = await postRequest(
+          '/api/v1/products/by_id',
+          requestData,
+        );
+        const responseData = await response.arrayBuffer();
+        const { product } = GetProductByIdResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return { product };
       } catch (error) {
         console.error('Error fetching products for country:', error);
         throw error;
