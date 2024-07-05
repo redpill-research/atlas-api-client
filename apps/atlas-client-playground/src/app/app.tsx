@@ -8,9 +8,10 @@ import { useThemeToggle } from '../hooks/use-theme-toggle';
 import {
   AtlasAuth,
   AtlasGetCountries,
+  AtlasGetProductById,
   AtlasGetProductsByCountries,
 } from './atlas-client-playground';
-import { AppProviders } from '../providers';
+import { AppProviders } from '../providers/providers';
 
 function RightSlot() {
   const [theme, toggleTheme] = useThemeToggle();
@@ -54,6 +55,7 @@ export function App() {
           <div className="grid md:grid-cols-2 gap-6 my-6">
             <AtlasGetCountries />
             <AtlasGetProductsByCountries />
+            <AtlasGetProductById />
             <AtlasAuth />
           </div>
         </AppProviders>

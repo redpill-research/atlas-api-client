@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Card } from '../components/card';
 import {
-  useAtlasAuth,
   useGetCountries,
+  useGetProductById,
   useGetProductsByCountry,
 } from '@red-pill/atlas-api-react';
 import { Input } from '../components/input';
@@ -10,6 +10,7 @@ import { Button } from '../components/button';
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import { mainnet } from 'viem/chains';
+import { useAtlasAuth } from '../providers/atlas-auth-provider';
 
 export function AtlasGetCountries() {
   const { data: countries } = useGetCountries({});
@@ -28,6 +29,23 @@ export function AtlasGetProductsByCountries() {
         onChange={(event) => {
           const value = event.currentTarget.value;
           setCountryId(value);
+        }}
+      />
+    </Card>
+  );
+}
+
+export function AtlasGetProductById() {
+  const [productId, setProductId] = useState<string>('');
+  const { data: product } = useGetProductById({ productId });
+
+  return (
+    <Card title="getProductById" response={product}>
+      <Input
+        placeholder="countryId"
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setProductId(value);
         }}
       />
     </Card>
