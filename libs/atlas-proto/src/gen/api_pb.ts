@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { Country, InviteCode, Product } from "./models_pb.js";
+import { Country, InviteCode, Order, Product } from "./models_pb.js";
 
 /**
  * @generated from message api.AuthStartRequest
@@ -320,106 +320,318 @@ export class GetProductsByCountryResponse extends Message<GetProductsByCountryRe
 }
 
 /**
- * @generated from message api.PurchaseProductRequest
+ * @generated from message api.GetProductByIdRequest
  */
-export class PurchaseProductRequest extends Message<PurchaseProductRequest> {
+export class GetProductByIdRequest extends Message<GetProductByIdRequest> {
+  /**
+   * @generated from field: string product_id = 1;
+   */
+  productId = "";
+
+  constructor(data?: PartialMessage<GetProductByIdRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.GetProductByIdRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "product_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetProductByIdRequest {
+    return new GetProductByIdRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetProductByIdRequest {
+    return new GetProductByIdRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetProductByIdRequest {
+    return new GetProductByIdRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetProductByIdRequest | PlainMessage<GetProductByIdRequest> | undefined, b: GetProductByIdRequest | PlainMessage<GetProductByIdRequest> | undefined): boolean {
+    return proto3.util.equals(GetProductByIdRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message api.GetProductByIdResponse
+ */
+export class GetProductByIdResponse extends Message<GetProductByIdResponse> {
+  /**
+   * @generated from field: models.Product product = 1;
+   */
+  product?: Product;
+
+  /**
+   * @generated from field: models.Country product_country = 2;
+   */
+  productCountry?: Country;
+
+  constructor(data?: PartialMessage<GetProductByIdResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.GetProductByIdResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "product", kind: "message", T: Product },
+    { no: 2, name: "product_country", kind: "message", T: Country },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetProductByIdResponse {
+    return new GetProductByIdResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetProductByIdResponse {
+    return new GetProductByIdResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetProductByIdResponse {
+    return new GetProductByIdResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetProductByIdResponse | PlainMessage<GetProductByIdResponse> | undefined, b: GetProductByIdResponse | PlainMessage<GetProductByIdResponse> | undefined): boolean {
+    return proto3.util.equals(GetProductByIdResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message api.CreateOrderRequest
+ */
+export class CreateOrderRequest extends Message<CreateOrderRequest> {
   /**
    * @generated from field: string product_id = 1;
    */
   productId = "";
 
   /**
-   * @generated from field: string country_id = 2;
-   */
-  countryId = "";
-
-  /**
-   * @generated from field: double product_denomination = 3;
+   * @generated from field: double product_denomination = 2;
    */
   productDenomination = 0;
 
-  constructor(data?: PartialMessage<PurchaseProductRequest>) {
+  constructor(data?: PartialMessage<CreateOrderRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "api.PurchaseProductRequest";
+  static readonly typeName = "api.CreateOrderRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "product_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "country_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "product_denomination", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 2, name: "product_denomination", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PurchaseProductRequest {
-    return new PurchaseProductRequest().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateOrderRequest {
+    return new CreateOrderRequest().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PurchaseProductRequest {
-    return new PurchaseProductRequest().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateOrderRequest {
+    return new CreateOrderRequest().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PurchaseProductRequest {
-    return new PurchaseProductRequest().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateOrderRequest {
+    return new CreateOrderRequest().fromJsonString(jsonString, options);
   }
 
-  static equals(a: PurchaseProductRequest | PlainMessage<PurchaseProductRequest> | undefined, b: PurchaseProductRequest | PlainMessage<PurchaseProductRequest> | undefined): boolean {
-    return proto3.util.equals(PurchaseProductRequest, a, b);
+  static equals(a: CreateOrderRequest | PlainMessage<CreateOrderRequest> | undefined, b: CreateOrderRequest | PlainMessage<CreateOrderRequest> | undefined): boolean {
+    return proto3.util.equals(CreateOrderRequest, a, b);
   }
 }
 
 /**
- * @generated from message api.PurchaseProductResponse
+ * @generated from message api.CreateOrderResponse
  */
-export class PurchaseProductResponse extends Message<PurchaseProductResponse> {
+export class CreateOrderResponse extends Message<CreateOrderResponse> {
   /**
    * @generated from field: string wallet = 1;
    */
   wallet = "";
 
   /**
+   * islm amount chain_id: 11235
+   *
    * @generated from field: double amount = 2;
    */
   amount = 0;
 
   /**
-   * @generated from field: string memo = 3;
+   * @generated from field: models.Order order = 3;
    */
-  memo = "";
+  order?: Order;
 
-  /**
-   * @generated from field: string purchase_id = 4;
-   */
-  purchaseId = "";
-
-  constructor(data?: PartialMessage<PurchaseProductResponse>) {
+  constructor(data?: PartialMessage<CreateOrderResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "api.PurchaseProductResponse";
+  static readonly typeName = "api.CreateOrderResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "wallet", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
-    { no: 3, name: "memo", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "purchase_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "order", kind: "message", T: Order },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PurchaseProductResponse {
-    return new PurchaseProductResponse().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateOrderResponse {
+    return new CreateOrderResponse().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PurchaseProductResponse {
-    return new PurchaseProductResponse().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateOrderResponse {
+    return new CreateOrderResponse().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PurchaseProductResponse {
-    return new PurchaseProductResponse().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateOrderResponse {
+    return new CreateOrderResponse().fromJsonString(jsonString, options);
   }
 
-  static equals(a: PurchaseProductResponse | PlainMessage<PurchaseProductResponse> | undefined, b: PurchaseProductResponse | PlainMessage<PurchaseProductResponse> | undefined): boolean {
-    return proto3.util.equals(PurchaseProductResponse, a, b);
+  static equals(a: CreateOrderResponse | PlainMessage<CreateOrderResponse> | undefined, b: CreateOrderResponse | PlainMessage<CreateOrderResponse> | undefined): boolean {
+    return proto3.util.equals(CreateOrderResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message api.GetOrderByIdRequest
+ */
+export class GetOrderByIdRequest extends Message<GetOrderByIdRequest> {
+  /**
+   * @generated from field: string order_id = 1;
+   */
+  orderId = "";
+
+  constructor(data?: PartialMessage<GetOrderByIdRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.GetOrderByIdRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "order_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetOrderByIdRequest {
+    return new GetOrderByIdRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetOrderByIdRequest {
+    return new GetOrderByIdRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetOrderByIdRequest {
+    return new GetOrderByIdRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetOrderByIdRequest | PlainMessage<GetOrderByIdRequest> | undefined, b: GetOrderByIdRequest | PlainMessage<GetOrderByIdRequest> | undefined): boolean {
+    return proto3.util.equals(GetOrderByIdRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message api.GetOrderByIdResponse
+ */
+export class GetOrderByIdResponse extends Message<GetOrderByIdResponse> {
+  /**
+   * @generated from field: models.Order order = 1;
+   */
+  order?: Order;
+
+  constructor(data?: PartialMessage<GetOrderByIdResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.GetOrderByIdResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "order", kind: "message", T: Order },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetOrderByIdResponse {
+    return new GetOrderByIdResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetOrderByIdResponse {
+    return new GetOrderByIdResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetOrderByIdResponse {
+    return new GetOrderByIdResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetOrderByIdResponse | PlainMessage<GetOrderByIdResponse> | undefined, b: GetOrderByIdResponse | PlainMessage<GetOrderByIdResponse> | undefined): boolean {
+    return proto3.util.equals(GetOrderByIdResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message api.GetAllOrdersRequest
+ */
+export class GetAllOrdersRequest extends Message<GetAllOrdersRequest> {
+  constructor(data?: PartialMessage<GetAllOrdersRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.GetAllOrdersRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAllOrdersRequest {
+    return new GetAllOrdersRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAllOrdersRequest {
+    return new GetAllOrdersRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAllOrdersRequest {
+    return new GetAllOrdersRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetAllOrdersRequest | PlainMessage<GetAllOrdersRequest> | undefined, b: GetAllOrdersRequest | PlainMessage<GetAllOrdersRequest> | undefined): boolean {
+    return proto3.util.equals(GetAllOrdersRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message api.GetAllOrdersResponse
+ */
+export class GetAllOrdersResponse extends Message<GetAllOrdersResponse> {
+  /**
+   * @generated from field: repeated models.Order orders = 1;
+   */
+  orders: Order[] = [];
+
+  constructor(data?: PartialMessage<GetAllOrdersResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.GetAllOrdersResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "orders", kind: "message", T: Order, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAllOrdersResponse {
+    return new GetAllOrdersResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAllOrdersResponse {
+    return new GetAllOrdersResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAllOrdersResponse {
+    return new GetAllOrdersResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetAllOrdersResponse | PlainMessage<GetAllOrdersResponse> | undefined, b: GetAllOrdersResponse | PlainMessage<GetAllOrdersResponse> | undefined): boolean {
+    return proto3.util.equals(GetAllOrdersResponse, a, b);
   }
 }
 

@@ -4,7 +4,43 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3 } from "@bufbuild/protobuf";
+import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
+
+/**
+ * @generated from enum models.OrderStatus
+ */
+export enum OrderStatus {
+  /**
+   * @generated from enum value: ORDER_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * order was created and waites for payment
+   *
+   * @generated from enum value: ORDER_STATUS_CREATED = 1;
+   */
+  CREATED = 1,
+
+  /**
+   * @generated from enum value: ORDER_STATUS_COMPLETED = 2;
+   */
+  COMPLETED = 2,
+
+  /**
+   * order was cancelled by user or by timeout
+   *
+   * @generated from enum value: ORDER_STATUS_CANCELLED = 3;
+   */
+  CANCELLED = 3,
+}
+// Retrieve enum metadata with: proto3.getEnumType(OrderStatus)
+proto3.util.setEnumType(OrderStatus, "models.OrderStatus", [
+  { no: 0, name: "ORDER_STATUS_UNSPECIFIED" },
+  { no: 1, name: "ORDER_STATUS_CREATED" },
+  { no: 2, name: "ORDER_STATUS_COMPLETED" },
+  { no: 3, name: "ORDER_STATUS_CANCELLED" },
+]);
 
 /**
  * @generated from message models.Country
@@ -278,6 +314,185 @@ export class InviteCode extends Message<InviteCode> {
 
   static equals(a: InviteCode | PlainMessage<InviteCode> | undefined, b: InviteCode | PlainMessage<InviteCode> | undefined): boolean {
     return proto3.util.equals(InviteCode, a, b);
+  }
+}
+
+/**
+ * @generated from message models.CardData
+ */
+export class CardData extends Message<CardData> {
+  /**
+   * @generated from field: string url = 1;
+   */
+  url = "";
+
+  /**
+   * @generated from field: string code = 2;
+   */
+  code = "";
+
+  /**
+   * "2024-06-29T19:48:24.334Z"
+   *
+   * @generated from field: string expiry_date_iso = 3;
+   */
+  expiryDateIso = "";
+
+  /**
+   * @generated from field: double face_value = 4;
+   */
+  faceValue = 0;
+
+  constructor(data?: PartialMessage<CardData>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "models.CardData";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "expiry_date_iso", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "face_value", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CardData {
+    return new CardData().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CardData {
+    return new CardData().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CardData {
+    return new CardData().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CardData | PlainMessage<CardData> | undefined, b: CardData | PlainMessage<CardData> | undefined): boolean {
+    return proto3.util.equals(CardData, a, b);
+  }
+}
+
+/**
+ * @generated from message models.Coin
+ */
+export class Coin extends Message<Coin> {
+  /**
+   * @generated from field: double amount = 1;
+   */
+  amount = 0;
+
+  /**
+   * @generated from field: string denom = 2;
+   */
+  denom = "";
+
+  constructor(data?: PartialMessage<Coin>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "models.Coin";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 2, name: "denom", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Coin {
+    return new Coin().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Coin {
+    return new Coin().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Coin {
+    return new Coin().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: Coin | PlainMessage<Coin> | undefined, b: Coin | PlainMessage<Coin> | undefined): boolean {
+    return proto3.util.equals(Coin, a, b);
+  }
+}
+
+/**
+ * @generated from message models.Order
+ */
+export class Order extends Message<Order> {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id = "";
+
+  /**
+   * @generated from field: models.Coin amount = 2;
+   */
+  amount?: Coin;
+
+  /**
+   * @generated from field: models.OrderStatus status = 3;
+   */
+  status = OrderStatus.UNSPECIFIED;
+
+  /**
+   * @generated from field: string tx_url = 4;
+   */
+  txUrl = "";
+
+  /**
+   * @generated from field: string tx_hash = 5;
+   */
+  txHash = "";
+
+  /**
+   * @generated from field: models.Product product = 6;
+   */
+  product?: Product;
+
+  /**
+   * @generated from field: models.CardData card_data = 7;
+   */
+  cardData?: CardData;
+
+  /**
+   * @generated from field: int64 created_at = 8;
+   */
+  createdAt = protoInt64.zero;
+
+  constructor(data?: PartialMessage<Order>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "models.Order";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "amount", kind: "message", T: Coin },
+    { no: 3, name: "status", kind: "enum", T: proto3.getEnumType(OrderStatus) },
+    { no: 4, name: "tx_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "tx_hash", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "product", kind: "message", T: Product },
+    { no: 7, name: "card_data", kind: "message", T: CardData },
+    { no: 8, name: "created_at", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Order {
+    return new Order().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Order {
+    return new Order().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Order {
+    return new Order().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: Order | PlainMessage<Order> | undefined, b: Order | PlainMessage<Order> | undefined): boolean {
+    return proto3.util.equals(Order, a, b);
   }
 }
 
