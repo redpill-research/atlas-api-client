@@ -19,6 +19,12 @@ import {
   SendInviteResponse,
   GenerateInviteCodeRequest,
   GenerateInviteCodeResponse,
+  CreateOrderRequest,
+  CreateOrderResponse,
+  GetOrderByIdRequest,
+  GetOrderByIdResponse,
+  GetAllOrdersRequest,
+  GetAllOrdersResponse,
 } from '@red-pill/atlas-proto';
 
 export interface AtlasApiClient {
@@ -53,6 +59,18 @@ export interface AtlasApiClient {
     data: Partial<GenerateInviteCodeRequest>,
     authToken: string,
   ) => Promise<{ code: string }>;
+  createOrder: (
+    data: Partial<CreateOrderRequest>,
+    authToken: string,
+  ) => Promise<CreateOrderResponse>;
+  getOrderById: (
+    data: Partial<GetOrderByIdRequest>,
+    authToken: string,
+  ) => Promise<GetOrderByIdResponse>;
+  getAllOrders: (
+    data: Partial<GetAllOrdersRequest>,
+    authToken: string,
+  ) => Promise<GetAllOrdersResponse>;
 }
 
 export function createAtlasApiClient({
@@ -219,6 +237,60 @@ export function createAtlasApiClient({
         return { code };
       } catch (error) {
         console.error('Error generating invite code:', error);
+        throw error;
+      }
+    },
+    createOrder: async (data, authToken) => {
+      try {
+        const requestData = new CreateOrderRequest(data);
+        const response = await postRequest(
+          '/api/v1/orders/create',
+          requestData,
+          authToken,
+        );
+        const responseData = await response.arrayBuffer();
+        const responseMessage = CreateOrderResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return responseMessage;
+      } catch (error) {
+        console.error('Error creating order:', error);
+        throw error;
+      }
+    },
+    getOrderById: async (data, authToken) => {
+      try {
+        const requestData = new GetOrderByIdRequest(data);
+        const response = await postRequest(
+          '/api/v1/orders/by_id',
+          requestData,
+          authToken,
+        );
+        const responseData = await response.arrayBuffer();
+        const responseMessage = GetOrderByIdResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return responseMessage;
+      } catch (error) {
+        console.error('Error fetching order by id:', error);
+        throw error;
+      }
+    },
+    getAllOrders: async (data, authToken) => {
+      try {
+        const requestData = new GetAllOrdersRequest(data);
+        const response = await postRequest(
+          '/api/v1/orders/all',
+          requestData,
+          authToken,
+        );
+        const responseData = await response.arrayBuffer();
+        const responseMessage = GetAllOrdersResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        return responseMessage;
+      } catch (error) {
+        console.error('Error fetching all orders:', error);
         throw error;
       }
     },
