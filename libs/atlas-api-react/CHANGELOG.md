@@ -1,3 +1,20 @@
+## 0.9.0 (2024-07-08)
+
+
+### 🚀 Features
+
+- **atlas-api-react:** implement hook to get all orders ([fe23bf3](https://github.com/redpill-research/atlas-api-client/commit/fe23bf3))
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** change get products query key ([0d83a36](https://github.com/redpill-research/atlas-api-client/commit/0d83a36))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.8.3 (2024-07-08)
 
 
