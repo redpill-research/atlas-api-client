@@ -1,3 +1,15 @@
+## 0.9.1 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- **atlas-api-js:** update api post request error text ([b826536](https://github.com/redpill-research/atlas-api-client/commit/b826536))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.9.0 (2024-07-05)
 
 
