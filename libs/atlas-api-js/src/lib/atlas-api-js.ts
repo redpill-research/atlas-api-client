@@ -65,12 +65,12 @@ export function createAtlasApiClient({
     request: T,
     authToken?: string,
   ): Promise<Response> {
-    const headers: HeadersInit = {
+    const headers = new Headers({
       'Content-Type': 'application/x-protobuf',
-    };
+    });
 
     if (authToken) {
-      headers['Authorization'] = `Bearer ${authToken}`;
+      headers.set('Authorization', `Bearer ${authToken}`);
     }
 
     const response = await fetch(new URL(endpoint, baseUrl), {
@@ -80,7 +80,10 @@ export function createAtlasApiClient({
     });
 
     if (!response.ok) {
-      throw new Error('Request failed with status: ' + response.status);
+      const errorMessage = response.statusText || 'Unknown error';
+      throw new Error(
+        `Request failed with status: ${response.status} - ${errorMessage}`,
+      );
     }
 
     return response;
