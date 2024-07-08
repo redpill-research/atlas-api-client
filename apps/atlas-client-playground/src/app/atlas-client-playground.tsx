@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card } from '../components/card';
 import {
+  useGetAllOrders,
   useGetCountries,
   useGetProductById,
   useGetProductsByCountry,
@@ -113,6 +114,22 @@ export function AtlasAuth() {
       >
         Log out
       </Button>
+    </Card>
+  );
+}
+
+export function AtlasGetAlOrders() {
+  const [authToken, setAuthToken] = useState<string>('');
+  const { data: orders } = useGetAllOrders(authToken);
+
+  return (
+    <Card title="getAllOrders" response={orders}>
+      <Input
+        placeholder="authToken"
+        onChange={(event) => {
+          setAuthToken(event.currentTarget.value);
+        }}
+      />
     </Card>
   );
 }

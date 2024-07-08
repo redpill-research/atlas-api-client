@@ -7,6 +7,7 @@ import { Container, Page } from '../components/layout';
 import { useThemeToggle } from '../hooks/use-theme-toggle';
 import {
   AtlasAuth,
+  AtlasGetAlOrders,
   AtlasGetCountries,
   AtlasGetProductById,
   AtlasGetProductsByCountries,
@@ -57,6 +58,7 @@ export function App() {
             <AtlasGetProductsByCountries />
             <AtlasGetProductById />
             <AtlasAuth />
+            <AtlasGetAlOrders />
           </div>
         </AppProviders>
       </Container>
