@@ -1,3 +1,15 @@
+## 0.11.0 (2024-07-08)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** add order request handlers ([c9d4365](https://github.com/redpill-research/atlas-api-client/commit/c9d4365))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.10.0 (2024-07-08)
 
 
