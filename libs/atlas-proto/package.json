@@ -1,6 +1,10 @@
 {
   "name": "@red-pill/atlas-proto",
   "version": "0.9.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redpill-research/atlas-api-client.git"
+  },
   "dependencies": {
     "@swc/helpers": "~0.5.11",
     "@bufbuild/protobuf": "^1.10.0"
