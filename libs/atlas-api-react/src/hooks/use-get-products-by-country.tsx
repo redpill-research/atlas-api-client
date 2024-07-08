@@ -8,7 +8,7 @@ export function useGetProductsByCountry({
   const { getProductsByCountry } = useAtlasApiClient();
 
   return useQuery({
-    queryKey: ['country-products', countryId],
+    queryKey: ['products', countryId],
     enabled: !!countryId && countryId.length > 0,
     queryFn: async () => {
       return await getProductsByCountry({ countryId });
