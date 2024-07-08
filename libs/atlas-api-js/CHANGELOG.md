@@ -1,3 +1,22 @@
+## 0.10.0 (2024-07-08)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** add ability to send requests to api with auth token header ([d8ab212](https://github.com/redpill-research/atlas-api-client/commit/d8ab212))
+
+- **atlas-api-js:** add referral request handlers ([59416f5](https://github.com/redpill-research/atlas-api-client/commit/59416f5))
+
+
+### 🩹 Fixes
+
+- **atlas-api-js:** use Headers instance for headers, add statusText to request fail error ([5113849](https://github.com/redpill-research/atlas-api-client/commit/5113849))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.9.2 (2024-07-08)
 
 
