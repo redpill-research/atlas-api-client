@@ -52,7 +52,7 @@ export function createAtlasApiClient({
     });
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
+      throw new Error('Request failed with status: ' + response.status);
     }
 
     return response;
