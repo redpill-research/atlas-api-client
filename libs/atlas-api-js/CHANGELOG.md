@@ -1,3 +1,20 @@
+## 0.9.2 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- add repository to package.json ([0e8960b](https://github.com/redpill-research/atlas-api-client/commit/0e8960b))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.9.1
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.9.1 (2024-07-08)
 
 
