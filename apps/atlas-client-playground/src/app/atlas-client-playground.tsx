@@ -9,7 +9,7 @@ import { Input } from '../components/input';
 import { Button } from '../components/button';
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { injected } from 'wagmi/connectors';
-import { mainnet } from 'viem/chains';
+import { haqqMainnet } from 'viem/chains';
 import { useAtlasAuth } from '../providers/atlas-auth-provider';
 
 export function AtlasGetCountries() {
@@ -67,7 +67,7 @@ export function AtlasAuth() {
       <Button
         onClick={async () => {
           await connectAsync({
-            chainId: mainnet.id,
+            chainId: haqqMainnet.id,
             connector: injected(),
           });
         }}

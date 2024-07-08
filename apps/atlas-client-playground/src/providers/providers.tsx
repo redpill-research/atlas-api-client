@@ -24,7 +24,7 @@ export function AppProviders({
         <AtlasApiProvider baseUrl={baseUrl}>
           <AtlasAuthProvider>{children}</AtlasAuthProvider>
         </AtlasApiProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </WagmiProvider>
   );
