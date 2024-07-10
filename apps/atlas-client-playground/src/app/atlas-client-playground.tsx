@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Card } from '../components/card';
 import {
+  useCreateOrder,
   useGetAllOrders,
   useGetCountries,
+  useGetOrdersById,
   useGetProductById,
   useGetProductsByCountry,
 } from '@red-pill/atlas-api-react';
@@ -118,7 +120,7 @@ export function AtlasAuth() {
   );
 }
 
-export function AtlasGetAlOrders() {
+export function AtlasGetAllOrders() {
   const [authToken, setAuthToken] = useState<string>('');
   const { data: orders } = useGetAllOrders(authToken);
 
@@ -130,6 +132,71 @@ export function AtlasGetAlOrders() {
           setAuthToken(event.currentTarget.value);
         }}
       />
+    </Card>
+  );
+}
+export function AtlasGetOrderById() {
+  const [authToken, setAuthToken] = useState<string>('');
+  const [orderId, setOrderId] = useState<string>('');
+  const { data: orders } = useGetOrdersById({ orderId }, authToken);
+
+  return (
+    <Card title="getAllOrders" response={orders}>
+      <Input
+        placeholder="authToken"
+        onChange={(event) => {
+          setAuthToken(event.currentTarget.value);
+        }}
+      />
+      <Input
+        placeholder="orderId"
+        onChange={(event) => {
+          setOrderId(event.currentTarget.value);
+        }}
+      />
+    </Card>
+  );
+}
+
+export function AtlasCreateOrder() {
+  const [authToken, setAuthToken] = useState<string>('');
+  const [productId, setProductId] = useState<string>('');
+  const [productDenomination, setProductDenomination] = useState<number | null>(
+    null,
+  );
+  const { mutateAsync, data: response } = useCreateOrder(authToken);
+
+  return (
+    <Card title="createOrder" response={response}>
+      <Input
+        placeholder="authToken"
+        onChange={(event) => {
+          setAuthToken(event.currentTarget.value);
+        }}
+      />
+      <Input
+        placeholder="productId"
+        onChange={(event) => {
+          setProductId(event.currentTarget.value);
+        }}
+      />
+      <Input
+        placeholder="productDenomination"
+        onChange={(event) => {
+          setProductDenomination(Number.parseFloat(event.currentTarget.value));
+        }}
+      />
+
+      <Button
+        onClick={async () => {
+          await mutateAsync({
+            productId,
+            productDenomination: productDenomination ?? 0,
+          });
+        }}
+      >
+        Create order
+      </Button>
     </Card>
   );
 }
