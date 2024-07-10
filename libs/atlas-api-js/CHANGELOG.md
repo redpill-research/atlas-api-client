@@ -1,3 +1,15 @@
+## 0.12.0 (2024-07-10)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** return plain json objects, add typings ([65c62e1](https://github.com/redpill-research/atlas-api-client/commit/65c62e1))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.11.1 (2024-07-10)
 
 

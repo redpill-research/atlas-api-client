@@ -1,3 +1,20 @@
+## 0.10.3 (2024-07-10)
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** use types from js library ([87cad98](https://github.com/redpill-research/atlas-api-client/commit/87cad98))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-api-js to 0.12.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.10.2 (2024-07-10)
 
 
