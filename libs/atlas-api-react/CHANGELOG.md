@@ -1,3 +1,15 @@
+## 0.10.1 (2024-07-10)
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** throw error if no authToken ([7d592bb](https://github.com/redpill-research/atlas-api-client/commit/7d592bb))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.10.0 (2024-07-10)
 
 
