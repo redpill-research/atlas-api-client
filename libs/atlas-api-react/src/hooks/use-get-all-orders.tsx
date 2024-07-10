@@ -9,7 +9,7 @@ export function useGetAllOrders(authToken?: string) {
     enabled: !!authToken && authToken.length > 0,
     queryFn: async () => {
       if (!authToken) {
-        return null;
+        throw new Error('Authentication token is missing');
       }
 
       return await getAllOrders({}, authToken);
