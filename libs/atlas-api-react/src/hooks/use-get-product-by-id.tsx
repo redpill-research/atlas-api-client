@@ -1,8 +1,8 @@
-import { GetProductByIdRequest } from '@red-pill/atlas-proto';
+import { IGetProductByIdRequest } from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
 import { useQuery } from '@tanstack/react-query';
 
-export function useGetProductById(data: Partial<GetProductByIdRequest>) {
+export function useGetProductById(data: Partial<IGetProductByIdRequest>) {
   const { getProductsById } = useAtlasApiClient();
   const productId = data.productId;
 

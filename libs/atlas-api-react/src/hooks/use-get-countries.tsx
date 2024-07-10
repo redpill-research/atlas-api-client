@@ -1,8 +1,8 @@
-import { GetCountriesRequest } from '@red-pill/atlas-proto';
+import { IGetCountriesRequest } from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
 import { useQuery } from '@tanstack/react-query';
 
-export function useGetCountries(data: Partial<GetCountriesRequest>) {
+export function useGetCountries(data: Partial<IGetCountriesRequest>) {
   const { getCountries } = useAtlasApiClient();
 
   return useQuery({

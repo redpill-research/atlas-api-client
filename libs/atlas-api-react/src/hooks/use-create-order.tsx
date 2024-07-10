@@ -1,17 +1,22 @@
-import { CreateOrderRequest, CreateOrderResponse } from '@red-pill/atlas-proto';
+import {
+  ICreateOrderRequest,
+  ICreateOrderResponse,
+} from '@red-pill/atlas-api-js';
 import { useMutation } from '@tanstack/react-query';
 import { useAtlasApiClient } from '../atlas-api-provider';
 
 export function useCreateOrder(authToken?: string) {
   const { createOrder } = useAtlasApiClient();
 
-  return useMutation<CreateOrderResponse, Error, Partial<CreateOrderRequest>>({
-    mutationFn: async (data) => {
-      if (!authToken) {
-        throw new Error('Authentication token is missing');
-      }
+  return useMutation<ICreateOrderResponse, Error, Partial<ICreateOrderRequest>>(
+    {
+      mutationFn: async (data) => {
+        if (!authToken) {
+          throw new Error('Authentication token is missing');
+        }
 
-      return await createOrder(data, authToken);
+        return await createOrder(data, authToken);
+      },
     },
-  });
+  );
 }

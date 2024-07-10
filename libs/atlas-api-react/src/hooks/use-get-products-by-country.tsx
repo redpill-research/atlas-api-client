@@ -1,9 +1,9 @@
-import { GetProductsByCountryRequest } from '@red-pill/atlas-proto';
+import { IGetProductsByCountryRequest } from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
 import { useQuery } from '@tanstack/react-query';
 
 export function useGetProductsByCountry(
-  data: Partial<GetProductsByCountryRequest>,
+  data: Partial<IGetProductsByCountryRequest>,
 ) {
   const { getProductsByCountry } = useAtlasApiClient();
   const countryId = data.countryId;

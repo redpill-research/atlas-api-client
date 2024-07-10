@@ -1,9 +1,9 @@
-import { GetOrderByIdRequest } from '@red-pill/atlas-proto';
+import { IGetOrderByIdRequest } from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
 import { useQuery } from '@tanstack/react-query';
 
 export function useGetOrdersById(
-  data: Partial<GetOrderByIdRequest>,
+  data: Partial<IGetOrderByIdRequest>,
   authToken?: string,
 ) {
   const { getOrderById } = useAtlasApiClient();
