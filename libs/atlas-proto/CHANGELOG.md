@@ -1,3 +1,7 @@
+## 0.10.1 (2024-07-10)
+
+This was a version bump only for atlas-proto to align it with other projects, there were no code changes.
+
 ## 0.10.0 (2024-07-10)
 
 
