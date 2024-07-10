@@ -1,18 +1,15 @@
 import { Message } from '@bufbuild/protobuf';
 import {
-  Country,
   GetCountriesRequest,
   GetCountriesResponse,
   GetProductsByCountryRequest,
   GetProductsByCountryResponse,
-  Product,
   AuthStartRequest,
   AuthStartResponse,
   AuthConfirmRequest,
   AuthConfirmResponse,
   GetProductByIdRequest,
   GetProductByIdResponse,
-  InviteCode,
   GetReferralInfoRequest,
   GetReferralInfoResponse,
   SendInviteRequest,
@@ -26,52 +23,20 @@ import {
   GetAllOrdersRequest,
   GetAllOrdersResponse,
 } from '@red-pill/atlas-proto';
-
-export interface AtlasApiClient {
-  getCountries: (
-    data: Partial<GetCountriesRequest>,
-  ) => Promise<{ countries: Country[]; preferredCountry?: Country }>;
-  getProductsByCountry: (
-    data: Partial<GetProductsByCountryRequest>,
-  ) => Promise<{ products: Product[] }>;
-  getProductsById: (
-    data: Partial<GetProductByIdRequest>,
-  ) => Promise<{ product: Product | undefined }>;
-  authStart: (
-    data: Partial<AuthStartRequest>,
-  ) => Promise<{ authId: string; messageForSign: string }>;
-  authConfirm: (
-    data: Partial<AuthConfirmRequest>,
-  ) => Promise<{ sessionToken: string }>;
-  getReferralInfo: (
-    data: Partial<GetReferralInfoRequest>,
-    authToken: string,
-  ) => Promise<{
-    availableCount: number;
-    invitedAddresses: string[];
-    generatedCodes: InviteCode[];
-  }>;
-  sendInvite: (
-    data: Partial<SendInviteRequest>,
-    authToken: string,
-  ) => Promise<{ tx: string }>;
-  generateInviteCode: (
-    data: Partial<GenerateInviteCodeRequest>,
-    authToken: string,
-  ) => Promise<{ code: string }>;
-  createOrder: (
-    data: Partial<CreateOrderRequest>,
-    authToken: string,
-  ) => Promise<CreateOrderResponse>;
-  getOrderById: (
-    data: Partial<GetOrderByIdRequest>,
-    authToken: string,
-  ) => Promise<GetOrderByIdResponse>;
-  getAllOrders: (
-    data: Partial<GetAllOrdersRequest>,
-    authToken: string,
-  ) => Promise<GetAllOrdersResponse>;
-}
+import {
+  AtlasApiClient,
+  IAuthConfirmResponse,
+  IAuthStartResponse,
+  ICreateOrderResponse,
+  IGenerateInviteCodeResponse,
+  IGetAllOrdersResponse,
+  IGetCountriesResponse,
+  IGetOrderByIdResponse,
+  IGetProductByIdResponse,
+  IGetProductsByCountryResponse,
+  IGetReferralInfoResponse,
+  ISendInviteResponse,
+} from './types';
 
 export function createAtlasApiClient({
   baseUrl,
@@ -114,10 +79,12 @@ export function createAtlasApiClient({
         const requestData = new AuthStartRequest(data);
         const response = await postRequest('/api/v1/auth/start', requestData);
         const responseData = await response.arrayBuffer();
-        const { authId, messageForSign } = AuthStartResponse.fromBinary(
+        const responseMessage = AuthStartResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { authId, messageForSign };
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IAuthStartResponse;
       } catch (error) {
         console.error('Error starting authentication:', error);
         throw error;
@@ -128,10 +95,12 @@ export function createAtlasApiClient({
         const requestData = new AuthConfirmRequest(data);
         const response = await postRequest('/api/v1/auth/confirm', requestData);
         const responseData = await response.arrayBuffer();
-        const { sessionToken } = AuthConfirmResponse.fromBinary(
+        const responseMessage = AuthConfirmResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { sessionToken };
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IAuthConfirmResponse;
       } catch (error) {
         console.error('Error confirming authentication:', error);
         throw error;
@@ -144,10 +113,12 @@ export function createAtlasApiClient({
         const requestData = new GetCountriesRequest(data);
         const response = await postRequest('/api/v1/countries', requestData);
         const responseData = await response.arrayBuffer();
-        const { countries, preferredCountry } = GetCountriesResponse.fromBinary(
+        const responseMessage = GetCountriesResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { countries, preferredCountry };
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IGetCountriesResponse;
       } catch (error) {
         console.error('Error fetching countries:', error);
         throw error;
@@ -158,10 +129,12 @@ export function createAtlasApiClient({
         const requestData = new GetProductsByCountryRequest(data);
         const response = await postRequest('/api/v1/products', requestData);
         const responseData = await response.arrayBuffer();
-        const { products } = GetProductsByCountryResponse.fromBinary(
+        const responseMessage = GetProductsByCountryResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { products };
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IGetProductsByCountryResponse;
       } catch (error) {
         console.error('Error fetching products for country:', error);
         throw error;
@@ -175,10 +148,12 @@ export function createAtlasApiClient({
           requestData,
         );
         const responseData = await response.arrayBuffer();
-        const { product } = GetProductByIdResponse.fromBinary(
+        const responseMessage = GetProductByIdResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { product };
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IGetProductByIdResponse;
       } catch (error) {
         console.error('Error fetching products for country:', error);
         throw error;
@@ -195,10 +170,12 @@ export function createAtlasApiClient({
           authToken,
         );
         const responseData = await response.arrayBuffer();
-        const { generatedCodes, availableCount, invitedAddresses } =
-          GetReferralInfoResponse.fromBinary(new Uint8Array(responseData));
+        const responseMessage = GetReferralInfoResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+        const responseMessageJson: unknown = responseMessage.toJson();
 
-        return { generatedCodes, availableCount, invitedAddresses };
+        return responseMessageJson as IGetReferralInfoResponse;
       } catch (error) {
         console.error('Error fetching referral info:', error);
         throw error;
@@ -213,10 +190,12 @@ export function createAtlasApiClient({
           authToken,
         );
         const responseData = await response.arrayBuffer();
-        const { tx } = SendInviteResponse.fromBinary(
+        const responseMessage = SendInviteResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { tx };
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as ISendInviteResponse;
       } catch (error) {
         console.error('Error sending invite:', error);
         throw error;
@@ -231,10 +210,12 @@ export function createAtlasApiClient({
           authToken,
         );
         const responseData = await response.arrayBuffer();
-        const { code } = GenerateInviteCodeResponse.fromBinary(
+        const responseMessage = GenerateInviteCodeResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return { code };
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IGenerateInviteCodeResponse;
       } catch (error) {
         console.error('Error generating invite code:', error);
         throw error;
@@ -252,7 +233,9 @@ export function createAtlasApiClient({
         const responseMessage = CreateOrderResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return responseMessage;
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as ICreateOrderResponse;
       } catch (error) {
         console.error('Error creating order:', error);
         throw error;
@@ -270,7 +253,9 @@ export function createAtlasApiClient({
         const responseMessage = GetOrderByIdResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return responseMessage;
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IGetOrderByIdResponse;
       } catch (error) {
         console.error('Error fetching order by id:', error);
         throw error;
@@ -288,7 +273,9 @@ export function createAtlasApiClient({
         const responseMessage = GetAllOrdersResponse.fromBinary(
           new Uint8Array(responseData),
         );
-        return responseMessage;
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as IGetAllOrdersResponse;
       } catch (error) {
         console.error('Error fetching all orders:', error);
         throw error;
