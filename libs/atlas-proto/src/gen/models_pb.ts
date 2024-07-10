@@ -418,6 +418,61 @@ export class Coin extends Message<Coin> {
 }
 
 /**
+ * @generated from message models.PaymentData
+ */
+export class PaymentData extends Message<PaymentData> {
+  /**
+   * @generated from field: string wallet = 1;
+   */
+  wallet = "";
+
+  /**
+   * @generated from field: models.Coin amount = 2;
+   */
+  amount?: Coin;
+
+  /**
+   * @generated from field: string tx_url = 3;
+   */
+  txUrl = "";
+
+  /**
+   * @generated from field: string tx_hash = 4;
+   */
+  txHash = "";
+
+  constructor(data?: PartialMessage<PaymentData>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "models.PaymentData";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "wallet", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "amount", kind: "message", T: Coin },
+    { no: 3, name: "tx_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "tx_hash", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PaymentData {
+    return new PaymentData().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PaymentData {
+    return new PaymentData().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PaymentData {
+    return new PaymentData().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PaymentData | PlainMessage<PaymentData> | undefined, b: PaymentData | PlainMessage<PaymentData> | undefined): boolean {
+    return proto3.util.equals(PaymentData, a, b);
+  }
+}
+
+/**
  * @generated from message models.Order
  */
 export class Order extends Message<Order> {
@@ -427,9 +482,9 @@ export class Order extends Message<Order> {
   id = "";
 
   /**
-   * @generated from field: models.Coin amount = 2;
+   * @generated from field: models.PaymentData payment_data = 2;
    */
-  amount?: Coin;
+  paymentData?: PaymentData;
 
   /**
    * @generated from field: models.OrderStatus status = 3;
@@ -437,27 +492,17 @@ export class Order extends Message<Order> {
   status = OrderStatus.UNSPECIFIED;
 
   /**
-   * @generated from field: string tx_url = 4;
-   */
-  txUrl = "";
-
-  /**
-   * @generated from field: string tx_hash = 5;
-   */
-  txHash = "";
-
-  /**
-   * @generated from field: models.Product product = 6;
+   * @generated from field: models.Product product = 4;
    */
   product?: Product;
 
   /**
-   * @generated from field: models.CardData card_data = 7;
+   * @generated from field: models.CardData card_data = 5;
    */
   cardData?: CardData;
 
   /**
-   * @generated from field: int64 created_at = 8;
+   * @generated from field: int64 created_at = 6;
    */
   createdAt = protoInt64.zero;
 
@@ -470,13 +515,11 @@ export class Order extends Message<Order> {
   static readonly typeName = "models.Order";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "amount", kind: "message", T: Coin },
+    { no: 2, name: "payment_data", kind: "message", T: PaymentData },
     { no: 3, name: "status", kind: "enum", T: proto3.getEnumType(OrderStatus) },
-    { no: 4, name: "tx_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "tx_hash", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 6, name: "product", kind: "message", T: Product },
-    { no: 7, name: "card_data", kind: "message", T: CardData },
-    { no: 8, name: "created_at", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "product", kind: "message", T: Product },
+    { no: 5, name: "card_data", kind: "message", T: CardData },
+    { no: 6, name: "created_at", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Order {
