@@ -1,3 +1,17 @@
+## 0.10.0 (2024-07-10)
+
+
+### 🚀 Features
+
+- **atlas-api-react:** implement get order by id hook ([4dcccd5](https://github.com/redpill-research/atlas-api-client/commit/4dcccd5))
+
+- **atlas-api-react:** add create order mutation hook ([04e4b8a](https://github.com/redpill-research/atlas-api-client/commit/04e4b8a))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.9.0 (2024-07-08)
 
 
