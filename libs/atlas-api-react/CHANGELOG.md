@@ -1,3 +1,15 @@
+## 0.11.0 (2024-07-11)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** add ability to customize react-query hook options ([c87b565](https://github.com/redpill-research/atlas-api-client/commit/c87b565))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.10.4 (2024-07-10)
 
 
