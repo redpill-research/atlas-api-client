@@ -7,7 +7,7 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetProductById(
   data: Partial<IGetProductByIdRequest>,
-  options?: UseQueryOptions<IGetProductByIdResponse, Error>,
+  options?: Partial<UseQueryOptions<IGetProductByIdResponse, Error>>,
 ) {
   const { getProductsById } = useAtlasApiClient();
   const productId = data.productId;

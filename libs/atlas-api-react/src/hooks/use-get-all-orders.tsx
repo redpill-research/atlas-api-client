@@ -4,7 +4,7 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetAllOrders(
   authToken?: string,
-  options?: UseQueryOptions<IGetAllOrdersResponse, Error>,
+  options?: Partial<UseQueryOptions<IGetAllOrdersResponse, Error>>,
 ) {
   const { getAllOrders } = useAtlasApiClient();
 

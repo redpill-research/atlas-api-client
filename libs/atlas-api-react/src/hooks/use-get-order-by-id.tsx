@@ -8,7 +8,7 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 export function useGetOrdersById(
   data: Partial<IGetOrderByIdRequest>,
   authToken?: string,
-  options?: UseQueryOptions<IGetOrderByIdResponse, Error>,
+  options?: Partial<UseQueryOptions<IGetOrderByIdResponse, Error>>,
 ) {
   const { getOrderById } = useAtlasApiClient();
   const orderId = data.orderId;

@@ -7,10 +7,12 @@ import { useAtlasApiClient } from '../atlas-api-provider';
 
 export function useCreateOrder(
   authToken?: string,
-  options?: UseMutationOptions<
-    ICreateOrderResponse,
-    Error,
-    Partial<ICreateOrderRequest>
+  options?: Partial<
+    UseMutationOptions<
+      ICreateOrderResponse,
+      Error,
+      Partial<ICreateOrderRequest>
+    >
   >,
 ) {
   const { createOrder } = useAtlasApiClient();
