@@ -1,8 +1,14 @@
-import { IGetProductByIdRequest } from '@red-pill/atlas-api-js';
+import {
+  IGetProductByIdRequest,
+  IGetProductByIdResponse,
+} from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
-export function useGetProductById(data: Partial<IGetProductByIdRequest>) {
+export function useGetProductById(
+  data: Partial<IGetProductByIdRequest>,
+  options?: UseQueryOptions<IGetProductByIdResponse, Error>,
+) {
   const { getProductsById } = useAtlasApiClient();
   const productId = data.productId;
 
@@ -12,5 +18,6 @@ export function useGetProductById(data: Partial<IGetProductByIdRequest>) {
     queryFn: async () => {
       return await getProductsById(data);
     },
+    ...options,
   });
 }

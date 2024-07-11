@@ -1,10 +1,14 @@
+import { IGetAllOrdersResponse } from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
-export function useGetAllOrders(authToken?: string) {
+export function useGetAllOrders(
+  authToken?: string,
+  options?: UseQueryOptions<IGetAllOrdersResponse, Error>,
+) {
   const { getAllOrders } = useAtlasApiClient();
 
-  return useQuery({
+  return useQuery<IGetAllOrdersResponse>({
     queryKey: ['orders'],
     enabled: !!authToken && authToken.length > 0,
     queryFn: async () => {
@@ -14,5 +18,6 @@ export function useGetAllOrders(authToken?: string) {
 
       return await getAllOrders({}, authToken);
     },
+    ...options,
   });
 }

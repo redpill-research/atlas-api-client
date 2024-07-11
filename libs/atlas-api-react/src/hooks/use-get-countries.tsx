@@ -1,8 +1,14 @@
-import { IGetCountriesRequest } from '@red-pill/atlas-api-js';
+import {
+  IGetCountriesRequest,
+  IGetCountriesResponse,
+} from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
-export function useGetCountries(data: Partial<IGetCountriesRequest>) {
+export function useGetCountries(
+  data: Partial<IGetCountriesRequest>,
+  options?: UseQueryOptions<IGetCountriesResponse, Error>,
+) {
   const { getCountries } = useAtlasApiClient();
 
   return useQuery({
@@ -10,5 +16,6 @@ export function useGetCountries(data: Partial<IGetCountriesRequest>) {
     queryFn: async () => {
       return await getCountries(data);
     },
+    ...options,
   });
 }

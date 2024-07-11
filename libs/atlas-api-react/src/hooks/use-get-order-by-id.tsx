@@ -1,10 +1,14 @@
-import { IGetOrderByIdRequest } from '@red-pill/atlas-api-js';
+import {
+  IGetOrderByIdRequest,
+  IGetOrderByIdResponse,
+} from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetOrdersById(
   data: Partial<IGetOrderByIdRequest>,
   authToken?: string,
+  options?: UseQueryOptions<IGetOrderByIdResponse, Error>,
 ) {
   const { getOrderById } = useAtlasApiClient();
   const orderId = data.orderId;
@@ -20,5 +24,6 @@ export function useGetOrdersById(
 
       return await getOrderById(data, authToken);
     },
+    ...options,
   });
 }
