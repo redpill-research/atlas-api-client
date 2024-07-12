@@ -1,3 +1,25 @@
+## 0.12.0 (2024-07-12)
+
+
+### 🚀 Features
+
+- **atlas-api-react:** update hooks to use auth token ([48c9d36](https://github.com/redpill-research/atlas-api-client/commit/48c9d36))
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** use partial interfaces for query hooks ([7ea3b9e](https://github.com/redpill-research/atlas-api-client/commit/7ea3b9e))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-api-js to 0.13.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.11.0 (2024-07-11)
 
 

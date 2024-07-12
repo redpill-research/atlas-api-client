@@ -1,3 +1,15 @@
+## 0.11.0 (2024-07-12)
+
+
+### 🚀 Features
+
+- **atlas-proto:** update proto and regenerate library ([291269d](https://github.com/redpill-research/atlas-api-client/commit/291269d))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.10.1 (2024-07-10)
 
 This was a version bump only for atlas-proto to align it with other projects, there were no code changes.

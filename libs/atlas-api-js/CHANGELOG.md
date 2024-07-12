@@ -1,3 +1,20 @@
+## 0.13.0 (2024-07-12)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** update types ([76168fe](https://github.com/redpill-research/atlas-api-client/commit/76168fe))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.11.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.12.1 (2024-07-10)
 
 
