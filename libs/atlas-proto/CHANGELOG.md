@@ -1,3 +1,15 @@
+## 0.12.0 (2024-07-12)
+
+
+### 🚀 Features
+
+- **atlas-proto:** upgrade proto, regenerate library code ([cf245d8](https://github.com/redpill-research/atlas-api-client/commit/cf245d8))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.11.0 (2024-07-12)
 
 
