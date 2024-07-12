@@ -39,7 +39,7 @@ export function App() {
 
   return (
     <Page header={<Header rightSlot={<RightSlot />} />}>
-      <Container className="py-6 md:py-8 lg:py-12">
+      <Container className="py-6 md:py-8 lg:py-12 flex flex-col gap-12">
         <Heading level={1} className="uppercase">
           Atlas API Client Playground
         </Heading>
@@ -55,11 +55,11 @@ export function App() {
         </div>
 
         <AppProviders baseUrl={apiEndpoint}>
-          <div className="grid md:grid-cols-2 gap-6 my-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <AtlasAuth />
             <AtlasGetCountries />
             <AtlasGetProductsByCountries />
             <AtlasGetProductById />
-            <AtlasAuth />
             <AtlasGetAllOrders />
             <AtlasGetOrderById />
             <AtlasCreateOrder />

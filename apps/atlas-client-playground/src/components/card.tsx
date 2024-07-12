@@ -1,14 +1,25 @@
 import { PropsWithChildren } from 'react';
 import { Heading } from './heading';
 import { DebugCode } from './debug-code';
+import clsx from 'clsx';
 
 export function Card({
   title,
   children,
   response,
-}: PropsWithChildren<{ title: string; response?: unknown }>) {
+  className,
+}: PropsWithChildren<{
+  title: string;
+  response?: unknown;
+  className?: string;
+}>) {
   return (
-    <div className="p-6 border rounded-lg border-graphic-second-2 flex flex-col gap-6">
+    <div
+      className={clsx(
+        'p-6 border rounded-lg border-graphic-second-2 flex flex-col gap-6 flex-1',
+        className,
+      )}
+    >
       <header>
         <Heading level={4}>{title}</Heading>
       </header>
