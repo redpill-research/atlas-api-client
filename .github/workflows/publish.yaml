@@ -3,7 +3,10 @@ name: Publish
 on:
   push:
     tags:
-      - '**'
+      - 'atlas-proto@*'
+      - 'atlas-api-react@*'
+      - 'atlas-api-js@*'
+  workflow_dispatch:
 
 jobs:
   test:
