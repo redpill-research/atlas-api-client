@@ -16,6 +16,11 @@ export class AuthStartRequest extends Message<AuthStartRequest> {
    */
   address = "";
 
+  /**
+   * @generated from field: optional string ref_code = 2;
+   */
+  refCode?: string;
+
   constructor(data?: PartialMessage<AuthStartRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -25,6 +30,7 @@ export class AuthStartRequest extends Message<AuthStartRequest> {
   static readonly typeName = "api.AuthStartRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "address", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "ref_code", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AuthStartRequest {
@@ -447,19 +453,7 @@ export class CreateOrderRequest extends Message<CreateOrderRequest> {
  */
 export class CreateOrderResponse extends Message<CreateOrderResponse> {
   /**
-   * @generated from field: string wallet = 1;
-   */
-  wallet = "";
-
-  /**
-   * islm amount chain_id: 11235
-   *
-   * @generated from field: double amount = 2;
-   */
-  amount = 0;
-
-  /**
-   * @generated from field: models.Order order = 3;
+   * @generated from field: models.Order order = 1;
    */
   order?: Order;
 
@@ -471,9 +465,7 @@ export class CreateOrderResponse extends Message<CreateOrderResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "api.CreateOrderResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "wallet", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
-    { no: 3, name: "order", kind: "message", T: Order },
+    { no: 1, name: "order", kind: "message", T: Order },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateOrderResponse {

@@ -39,6 +39,11 @@ export enum ErrorTypes {
    * @generated from enum value: INTERNAL = 5;
    */
   INTERNAL = 5,
+
+  /**
+   * @generated from enum value: DONT_HAVE_INVITE = 6;
+   */
+  DONT_HAVE_INVITE = 6,
 }
 // Retrieve enum metadata with: proto3.getEnumType(ErrorTypes)
 proto3.util.setEnumType(ErrorTypes, "errors.ErrorTypes", [
@@ -48,6 +53,7 @@ proto3.util.setEnumType(ErrorTypes, "errors.ErrorTypes", [
   { no: 3, name: "UNAUTHENTICATED" },
   { no: 4, name: "UNIMPLEMENTED" },
   { no: 5, name: "INTERNAL" },
+  { no: 6, name: "DONT_HAVE_INVITE" },
 ]);
 
 /**

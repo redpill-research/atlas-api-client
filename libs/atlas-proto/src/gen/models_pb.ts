@@ -16,30 +16,46 @@ export enum OrderStatus {
   UNSPECIFIED = 0,
 
   /**
-   * order was created and waites for payment
+   * order was created
    *
    * @generated from enum value: ORDER_STATUS_CREATED = 1;
    */
   CREATED = 1,
 
   /**
-   * @generated from enum value: ORDER_STATUS_COMPLETED = 2;
+   * order is pending and waits for payment
+   *
+   * @generated from enum value: ORDER_STATUS_PENDING = 2;
    */
-  COMPLETED = 2,
+  PENDING = 2,
 
   /**
-   * order was cancelled by user or by timeout
-   *
-   * @generated from enum value: ORDER_STATUS_CANCELLED = 3;
+   * @generated from enum value: ORDER_STATUS_COMPLETED = 3;
    */
-  CANCELLED = 3,
+  COMPLETED = 3,
+
+  /**
+   * order was cancelled by user
+   *
+   * @generated from enum value: ORDER_STATUS_CANCELLED = 4;
+   */
+  CANCELLED = 4,
+
+  /**
+   * order was expired
+   *
+   * @generated from enum value: ORDER_STATUS_EXPIRED = 5;
+   */
+  EXPIRED = 5,
 }
 // Retrieve enum metadata with: proto3.getEnumType(OrderStatus)
 proto3.util.setEnumType(OrderStatus, "models.OrderStatus", [
   { no: 0, name: "ORDER_STATUS_UNSPECIFIED" },
   { no: 1, name: "ORDER_STATUS_CREATED" },
-  { no: 2, name: "ORDER_STATUS_COMPLETED" },
-  { no: 3, name: "ORDER_STATUS_CANCELLED" },
+  { no: 2, name: "ORDER_STATUS_PENDING" },
+  { no: 3, name: "ORDER_STATUS_COMPLETED" },
+  { no: 4, name: "ORDER_STATUS_CANCELLED" },
+  { no: 5, name: "ORDER_STATUS_EXPIRED" },
 ]);
 
 /**
@@ -432,14 +448,19 @@ export class PaymentData extends Message<PaymentData> {
   amount?: Coin;
 
   /**
-   * @generated from field: string tx_url = 3;
+   * @generated from field: int64 expired_after_seconds = 3;
    */
-  txUrl = "";
+  expiredAfterSeconds = protoInt64.zero;
 
   /**
-   * @generated from field: string tx_hash = 4;
+   * @generated from field: optional string tx_url = 4;
    */
-  txHash = "";
+  txUrl?: string;
+
+  /**
+   * @generated from field: optional string tx_hash = 5;
+   */
+  txHash?: string;
 
   constructor(data?: PartialMessage<PaymentData>) {
     super();
@@ -451,8 +472,9 @@ export class PaymentData extends Message<PaymentData> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "wallet", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "amount", kind: "message", T: Coin },
-    { no: 3, name: "tx_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "tx_hash", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "expired_after_seconds", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "tx_url", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "tx_hash", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PaymentData {
