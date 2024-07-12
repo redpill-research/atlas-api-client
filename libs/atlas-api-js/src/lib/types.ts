@@ -2,9 +2,11 @@
 
 export enum OrderStatus {
   UNSPECIFIED = 0,
-  CREATED = 1, // order was created and waites for payment
-  COMPLETED = 2,
-  CANCELLED = 3, // order was cancelled by user or by timeout
+  CREATED = 1, // order was created
+  PENDING = 2, // order is pending and waits for payment
+  COMPLETED = 3,
+  CANCELLED = 4, // order was cancelled by user
+  EXPIRED = 5, // order was expired
 }
 
 export interface ICountry {
@@ -28,9 +30,9 @@ export interface IProduct {
   id: string;
   name: string;
   countryId: string;
-  currency?: ICurrency;
+  currency: ICurrency;
   denominations: number[];
-  valueRange?: IProductValueRange;
+  valueRange: IProductValueRange;
   image: string;
   description?: string;
   termsAndConditions?: string;
@@ -57,8 +59,9 @@ export interface ICoin {
 export interface IPaymentData {
   wallet: string;
   amount: ICoin;
-  txUrl: string;
-  txHash: string;
+  expiredAfterSeconds: number;
+  txUrl?: string;
+  txHash?: string;
 }
 
 export interface IOrder {
@@ -70,13 +73,9 @@ export interface IOrder {
   createdAt: string;
 }
 
-export interface ProductValueRange {
-  min: number;
-  max: number;
-}
-
 export interface IAuthStartRequest {
   address: string;
+  refCode?: string;
 }
 
 export interface IAuthStartResponse {
@@ -113,7 +112,7 @@ export interface IGetProductByIdRequest {
 }
 
 export interface IGetProductByIdResponse {
-  product?: IProduct;
+  product: IProduct;
   productCountry?: ICountry;
 }
 
@@ -123,9 +122,7 @@ export interface ICreateOrderRequest {
 }
 
 export interface ICreateOrderResponse {
-  wallet: string;
-  amount: number;
-  order?: IOrder;
+  order: IOrder;
 }
 
 export interface IGetOrderByIdRequest {
@@ -133,7 +130,7 @@ export interface IGetOrderByIdRequest {
 }
 
 export interface IGetOrderByIdResponse {
-  order?: IOrder;
+  order: IOrder;
 }
 
 export interface IGetAllOrdersRequest {}
@@ -165,19 +162,22 @@ export interface IGenerateInviteCodeResponse {
 }
 
 export interface AtlasApiClient {
-  getCountries: (
-    data: Partial<IGetCountriesRequest>,
-  ) => Promise<IGetCountriesResponse>;
-  getProductsByCountry: (
-    data: Partial<IGetProductsByCountryRequest>,
-  ) => Promise<IGetProductsByCountryResponse>;
-  getProductsById: (
-    data: Partial<IGetProductByIdRequest>,
-  ) => Promise<IGetProductByIdResponse>;
   authStart: (data: Partial<IAuthStartRequest>) => Promise<IAuthStartResponse>;
   authConfirm: (
     data: Partial<IAuthConfirmRequest>,
   ) => Promise<IAuthConfirmResponse>;
+  getCountries: (
+    data: Partial<IGetCountriesRequest>,
+    authToken: string,
+  ) => Promise<IGetCountriesResponse>;
+  getProductsByCountry: (
+    data: Partial<IGetProductsByCountryRequest>,
+    authToken: string,
+  ) => Promise<IGetProductsByCountryResponse>;
+  getProductsById: (
+    data: Partial<IGetProductByIdRequest>,
+    authToken: string,
+  ) => Promise<IGetProductByIdResponse>;
   getReferralInfo: (
     data: Partial<IGetReferralInfoRequest>,
     authToken: string,
