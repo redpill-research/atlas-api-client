@@ -69,6 +69,7 @@ export interface IOrder {
   paymentData: IPaymentData;
   status: OrderStatus;
   product: IProduct;
+  productFaceAmount: number;
   cardData: ICardData;
   createdAt: string;
 }
