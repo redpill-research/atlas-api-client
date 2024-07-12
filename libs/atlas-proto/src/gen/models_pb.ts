@@ -519,12 +519,17 @@ export class Order extends Message<Order> {
   product?: Product;
 
   /**
-   * @generated from field: models.CardData card_data = 5;
+   * @generated from field: double product_face_amount = 5;
+   */
+  productFaceAmount = 0;
+
+  /**
+   * @generated from field: models.CardData card_data = 10;
    */
   cardData?: CardData;
 
   /**
-   * @generated from field: int64 created_at = 6;
+   * @generated from field: int64 created_at = 100;
    */
   createdAt = protoInt64.zero;
 
@@ -540,8 +545,9 @@ export class Order extends Message<Order> {
     { no: 2, name: "payment_data", kind: "message", T: PaymentData },
     { no: 3, name: "status", kind: "enum", T: proto3.getEnumType(OrderStatus) },
     { no: 4, name: "product", kind: "message", T: Product },
-    { no: 5, name: "card_data", kind: "message", T: CardData },
-    { no: 6, name: "created_at", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 5, name: "product_face_amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 10, name: "card_data", kind: "message", T: CardData },
+    { no: 100, name: "created_at", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Order {
