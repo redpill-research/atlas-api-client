@@ -1,8 +1,12 @@
-import { IGetAllOrdersResponse } from '@red-pill/atlas-api-js';
+import {
+  IGetAllOrdersRequest,
+  IGetAllOrdersResponse,
+} from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetAllOrders(
+  data: Partial<IGetAllOrdersRequest>,
   authToken?: string,
   options?: Partial<UseQueryOptions<IGetAllOrdersResponse, Error>>,
 ) {
@@ -16,7 +20,7 @@ export function useGetAllOrders(
         throw new Error('Authentication token is missing');
       }
 
-      return await getAllOrders({}, authToken);
+      return await getAllOrders(data, authToken);
     },
     ...options,
   });

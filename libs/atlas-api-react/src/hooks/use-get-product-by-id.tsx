@@ -7,16 +7,25 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetProductById(
   data: Partial<IGetProductByIdRequest>,
+  authToken?: string,
   options?: Partial<UseQueryOptions<IGetProductByIdResponse, Error>>,
 ) {
   const { getProductsById } = useAtlasApiClient();
   const productId = data.productId;
 
-  return useQuery({
+  return useQuery<IGetProductByIdResponse>({
     queryKey: ['product', productId],
-    enabled: !!productId && productId.length > 0,
+    enabled:
+      !!authToken &&
+      authToken.length > 0 &&
+      !!productId &&
+      productId.length > 0,
     queryFn: async () => {
-      return await getProductsById(data);
+      if (!authToken) {
+        throw new Error('Authentication token is missing');
+      }
+
+      return await getProductsById(data, authToken);
     },
     ...options,
   });

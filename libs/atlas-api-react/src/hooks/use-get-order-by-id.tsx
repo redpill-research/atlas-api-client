@@ -13,7 +13,7 @@ export function useGetOrdersById(
   const { getOrderById } = useAtlasApiClient();
   const orderId = data.orderId;
 
-  return useQuery({
+  return useQuery<IGetOrderByIdResponse>({
     queryKey: ['order', orderId],
     enabled:
       !!authToken && authToken.length > 0 && !!orderId && orderId.length > 0,

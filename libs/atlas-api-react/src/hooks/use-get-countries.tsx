@@ -7,14 +7,20 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetCountries(
   data: Partial<IGetCountriesRequest>,
+  authToken?: string,
   options?: Partial<UseQueryOptions<IGetCountriesResponse, Error>>,
 ) {
   const { getCountries } = useAtlasApiClient();
 
-  return useQuery({
+  return useQuery<IGetCountriesResponse>({
     queryKey: ['countries'],
+    enabled: !!authToken && authToken.length > 0,
     queryFn: async () => {
-      return await getCountries(data);
+      if (!authToken) {
+        throw new Error('Authentication token is missing');
+      }
+
+      return await getCountries(data, authToken);
     },
     ...options,
   });
