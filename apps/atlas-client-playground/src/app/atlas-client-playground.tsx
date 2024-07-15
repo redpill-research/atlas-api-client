@@ -9,6 +9,7 @@ import {
   useGetProductById,
   useGetProductsByCountry,
   useGetReferralInfo,
+  useSendInvite,
 } from '@red-pill/atlas-api-react';
 import { Input } from '../components/input';
 import { Button } from '../components/button';
@@ -233,6 +234,32 @@ export function AtlasGenerateInviteCode() {
         disabled={!token}
       >
         Generate
+      </Button>
+    </Card>
+  );
+}
+
+export function AtlasSendInvite() {
+  const { token } = useAtlasAuth();
+  const [address, setAddress] = useState<string>('');
+  const { data: response, mutateAsync } = useSendInvite(token ?? undefined);
+
+  return (
+    <Card title="sendInvite" response={response}>
+      {!token && <div>Require auth before request</div>}
+      <Input
+        placeholder="address"
+        onChange={(event) => {
+          setAddress(event.currentTarget.value);
+        }}
+      />
+      <Button
+        onClick={async () => {
+          await mutateAsync({ address });
+        }}
+        disabled={!token}
+      >
+        Send invite
       </Button>
     </Card>
   );

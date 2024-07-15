@@ -15,6 +15,7 @@ import {
   AtlasGetProductById,
   AtlasGetProductsByCountries,
   AtlasRefInfo,
+  AtlasSendInvite,
 } from './atlas-client-playground';
 import { AppProviders } from '../providers/providers';
 
@@ -67,6 +68,7 @@ export function App() {
             <AtlasCreateOrder />
             <AtlasRefInfo />
             <AtlasGenerateInviteCode />
+            <AtlasSendInvite />
           </div>
         </AppProviders>
       </Container>
