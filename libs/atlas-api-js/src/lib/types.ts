@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 
 export enum OrderStatus {
-  UNSPECIFIED = 0,
-  CREATED = 1, // order was created
-  PENDING = 2, // order is pending and waits for payment
-  COMPLETED = 3,
-  CANCELLED = 4, // order was cancelled by user
-  EXPIRED = 5, // order was expired
+  UNSPECIFIED = 'ORDER_STATUS_UNSPECIFIED',
+  CREATED = 'ORDER_STATUS_CREATED', // order was created
+  PENDING = 'ORDER_STATUS_PENDING', // order is pending and waits for payment
+  COMPLETED = 'ORDER_STATUS_COMPLETED',
+  CANCELLED = 'ORDER_STATUS_CANCELLED', // order was cancelled by user
+  EXPIRED = 'ORDER_STATUS_EXPIRED', // order was expired
 }
 
 export interface ICountry {
