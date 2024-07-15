@@ -13,6 +13,7 @@ export interface ICountry {
   id: string;
   name: string;
   flagUrl?: string;
+  flagEmoji?: string;
 }
 
 export interface ICurrency {

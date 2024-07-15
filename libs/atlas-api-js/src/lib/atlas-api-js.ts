@@ -107,11 +107,15 @@ export function createAtlasApiClient({
       }
     },
 
-    // Public API
-    getCountries: async (data) => {
+    // Private API
+    getCountries: async (data, authToken) => {
       try {
         const requestData = new GetCountriesRequest(data);
-        const response = await postRequest('/api/v1/countries', requestData);
+        const response = await postRequest(
+          '/api/v1/countries',
+          requestData,
+          authToken,
+        );
         const responseData = await response.arrayBuffer();
         const responseMessage = GetCountriesResponse.fromBinary(
           new Uint8Array(responseData),
@@ -124,10 +128,14 @@ export function createAtlasApiClient({
         throw error;
       }
     },
-    getProductsByCountry: async (data) => {
+    getProductsByCountry: async (data, authToken) => {
       try {
         const requestData = new GetProductsByCountryRequest(data);
-        const response = await postRequest('/api/v1/products', requestData);
+        const response = await postRequest(
+          '/api/v1/products',
+          requestData,
+          authToken,
+        );
         const responseData = await response.arrayBuffer();
         const responseMessage = GetProductsByCountryResponse.fromBinary(
           new Uint8Array(responseData),
@@ -140,12 +148,13 @@ export function createAtlasApiClient({
         throw error;
       }
     },
-    getProductsById: async (data) => {
+    getProductsById: async (data, authToken) => {
       try {
         const requestData = new GetProductByIdRequest(data);
         const response = await postRequest(
           '/api/v1/products/by_id',
           requestData,
+          authToken,
         );
         const responseData = await response.arrayBuffer();
         const responseMessage = GetProductByIdResponse.fromBinary(
@@ -159,8 +168,6 @@ export function createAtlasApiClient({
         throw error;
       }
     },
-
-    // Private API
     getReferralInfo: async (data, authToken) => {
       try {
         const requestData = new GetReferralInfoRequest(data);
