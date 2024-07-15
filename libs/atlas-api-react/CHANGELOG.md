@@ -1,3 +1,17 @@
+## 0.14.0 (2024-07-15)
+
+
+### 🚀 Features
+
+- **atlas-api-react:** add generate invite hook ([97c4e88](https://github.com/redpill-research/atlas-api-client/commit/97c4e88))
+
+- **atlas-api-react:** add send invite hook ([118fbfb](https://github.com/redpill-research/atlas-api-client/commit/118fbfb))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.13.0 (2024-07-15)
 
 
