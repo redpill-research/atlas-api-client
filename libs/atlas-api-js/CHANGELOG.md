@@ -1,3 +1,20 @@
+## 0.14.2 (2024-07-15)
+
+
+### 🩹 Fixes
+
+- **atlas-api-js:** add auth token to get countries and get product requests ([e6d5c02](https://github.com/redpill-research/atlas-api-client/commit/e6d5c02))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.13.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.14.1 (2024-07-15)
 
 
