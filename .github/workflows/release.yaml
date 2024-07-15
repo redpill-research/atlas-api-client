@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test:
+  release:
     name: Release
     runs-on: ubuntu-latest
     permissions:
