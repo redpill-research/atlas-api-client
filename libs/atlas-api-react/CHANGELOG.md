@@ -1,3 +1,10 @@
+## 0.14.1 (2024-07-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-api-js to 0.14.3
+
 ## 0.14.0 (2024-07-15)
 
 

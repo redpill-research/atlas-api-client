@@ -1,3 +1,10 @@
+## 0.14.3 (2024-07-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.13.1
+
 ## 0.14.2 (2024-07-15)
 
 
