@@ -77,6 +77,11 @@ export class Country extends Message<Country> {
    */
   flagUrl?: string;
 
+  /**
+   * @generated from field: optional string flag_emoji = 4;
+   */
+  flagEmoji?: string;
+
   constructor(data?: PartialMessage<Country>) {
     super();
     proto3.util.initPartial(data, this);
@@ -88,6 +93,7 @@ export class Country extends Message<Country> {
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "flag_url", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "flag_emoji", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Country {
