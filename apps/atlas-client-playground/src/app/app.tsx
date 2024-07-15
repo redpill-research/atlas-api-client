@@ -8,6 +8,7 @@ import { useThemeToggle } from '../hooks/use-theme-toggle';
 import {
   AtlasAuth,
   AtlasCreateOrder,
+  AtlasGenerateInviteCode,
   AtlasGetAllOrders,
   AtlasGetCountries,
   AtlasGetOrderById,
@@ -65,6 +66,7 @@ export function App() {
             <AtlasGetOrderById />
             <AtlasCreateOrder />
             <AtlasRefInfo />
+            <AtlasGenerateInviteCode />
           </div>
         </AppProviders>
       </Container>

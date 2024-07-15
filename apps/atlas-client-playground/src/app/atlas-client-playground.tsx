@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card } from '../components/card';
 import {
   useCreateOrder,
+  useGenerateInviteCode,
   useGetAllOrders,
   useGetCountries,
   useGetOrdersById,
@@ -212,6 +213,27 @@ export function AtlasRefInfo() {
   return (
     <Card title="getReferralInfo" response={response}>
       {!token && <div>Require auth before request</div>}
+    </Card>
+  );
+}
+
+export function AtlasGenerateInviteCode() {
+  const { token } = useAtlasAuth();
+  const { data: response, mutateAsync } = useGenerateInviteCode(
+    token ?? undefined,
+  );
+
+  return (
+    <Card title="generateInviteCode" response={response}>
+      {!token && <div>Require auth before request</div>}
+      <Button
+        onClick={async () => {
+          await mutateAsync({});
+        }}
+        disabled={!token}
+      >
+        Generate
+      </Button>
     </Card>
   );
 }
