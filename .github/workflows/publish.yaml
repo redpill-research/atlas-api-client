@@ -26,23 +26,10 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
-      - name: Check if 'latest' tag exists
-        id: check_latest_tag
-        run: |
-          if git rev-parse "latest" >/dev/null 2>&1; then
-            echo "Tag 'latest' exists"
-            echo "LATEST_TAG_EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "Tag 'latest' does not exist"
-            echo "LATEST_TAG_EXISTS=false" >> $GITHUB_ENV
-          fi
-
       - name: Setup pnpm
-        if: env.LATEST_TAG_EXISTS == 'false'
         uses: pnpm/action-setup@v4
 
       - name: Install Node
-        if: env.LATEST_TAG_EXISTS == 'false'
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -51,36 +38,20 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm install --frozen-lockfile
         shell: bash
 
       - name: Print Environment Info
-        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm exec nx report
         shell: bash
 
       - name: Build packages
-        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm exec nx run-many --target=build --verbose
         shell: bash
 
       - name: Publish to npm
-        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm exec nx release publish --verbose
         shell: bash
         env:
           NPM_CONFIG_PROVENANCE: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-
-      - name: Tag 'latest'
-        if: env.LATEST_TAG_EXISTS == 'false'
-        run: |
-          git tag latest
-          git push origin latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIT_AUTHOR_NAME: redpill-ci
-          GIT_AUTHOR_EMAIL: redpill-ci@redpill.ventures
-          GIT_COMMITTER_NAME: redpill-ci
-          GIT_COMMITTER_EMAIL: redpill-ci@redpill.ventures
