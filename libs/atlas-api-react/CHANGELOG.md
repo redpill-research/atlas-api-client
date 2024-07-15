@@ -1,3 +1,20 @@
+## 0.13.0 (2024-07-15)
+
+
+### 🚀 Features
+
+- **atlas-api-react:** add get referral info hook ([b1772af](https://github.com/redpill-research/atlas-api-client/commit/b1772af))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-api-js to 0.14.1
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.12.0 (2024-07-12)
 
 

@@ -1,3 +1,15 @@
+## 0.14.1 (2024-07-15)
+
+
+### 🩹 Fixes
+
+- **atlas-api-js:** update order status type ([79d3398](https://github.com/redpill-research/atlas-api-client/commit/79d3398))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.14.0 (2024-07-12)
 
 
