@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     tags:
-      - '*'
+      - '**'
   workflow_dispatch:
 
 jobs:
@@ -31,18 +31,18 @@ jobs:
         run: |
           if git rev-parse "latest" >/dev/null 2>&1; then
             echo "Tag 'latest' exists"
-            echo "::set-output name=exists::true"
+            echo "LATEST_TAG_EXISTS=true" >> $GITHUB_ENV
           else
             echo "Tag 'latest' does not exist"
-            echo "::set-output name=exists::false"
+            echo "LATEST_TAG_EXISTS=false" >> $GITHUB_ENV
           fi
 
       - name: Setup pnpm
-        if: steps.check_latest_tag.outputs.exists == 'false'
+        if: env.LATEST_TAG_EXISTS == 'false'
         uses: pnpm/action-setup@v4
 
       - name: Install Node
-        if: steps.check_latest_tag.outputs.exists == 'false'
+        if: env.LATEST_TAG_EXISTS == 'false'
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -51,22 +51,22 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        if: steps.check_latest_tag.outputs.exists == 'false'
+        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm install --frozen-lockfile
         shell: bash
 
       - name: Print Environment Info
-        if: steps.check_latest_tag.outputs.exists == 'false'
+        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm exec nx report
         shell: bash
 
       - name: Build packages
-        if: steps.check_latest_tag.outputs.exists == 'false'
+        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm exec nx run-many --target=build --verbose
         shell: bash
 
       - name: Publish to npm
-        if: steps.check_latest_tag.outputs.exists == 'false'
+        if: env.LATEST_TAG_EXISTS == 'false'
         run: pnpm exec nx release publish --verbose
         shell: bash
         env:
@@ -74,7 +74,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
       - name: Tag 'latest'
-        if: steps.check_latest_tag.outputs.exists == 'false'
+        if: env.LATEST_TAG_EXISTS == 'false'
         run: |
           git tag latest
           git push origin latest
