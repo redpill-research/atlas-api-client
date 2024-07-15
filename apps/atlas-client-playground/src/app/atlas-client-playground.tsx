@@ -7,6 +7,7 @@ import {
   useGetOrdersById,
   useGetProductById,
   useGetProductsByCountry,
+  useGetReferralInfo,
 } from '@red-pill/atlas-api-react';
 import { Input } from '../components/input';
 import { Button } from '../components/button';
@@ -200,6 +201,17 @@ export function AtlasCreateOrder() {
       >
         Create order
       </Button>
+    </Card>
+  );
+}
+
+export function AtlasRefInfo() {
+  const { token } = useAtlasAuth();
+  const { data: response } = useGetReferralInfo({}, token ?? undefined);
+
+  return (
+    <Card title="getReferralInfo" response={response}>
+      {!token && <div>Require auth before request</div>}
     </Card>
   );
 }

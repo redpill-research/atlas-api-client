@@ -13,6 +13,7 @@ import {
   AtlasGetOrderById,
   AtlasGetProductById,
   AtlasGetProductsByCountries,
+  AtlasRefInfo,
 } from './atlas-client-playground';
 import { AppProviders } from '../providers/providers';
 
@@ -63,6 +64,7 @@ export function App() {
             <AtlasGetAllOrders />
             <AtlasGetOrderById />
             <AtlasCreateOrder />
+            <AtlasRefInfo />
           </div>
         </AppProviders>
       </Container>
