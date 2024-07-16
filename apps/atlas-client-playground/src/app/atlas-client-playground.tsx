@@ -27,7 +27,7 @@ export function AtlasAuth() {
   const [refCode, setRefCode] = useState<string>('');
 
   return (
-    <Card title="Auth" className="col-span-2">
+    <Card title="Auth" className="md:col-span-2">
       <div>
         <div>address: {address}</div>
         <div>token: {token}</div>
@@ -55,7 +55,8 @@ export function AtlasAuth() {
           try {
             const { messageForSign, authId } = await authStart({
               address,
-              refCode,
+              refCode:
+                refCode !== undefined && refCode !== '' ? refCode : undefined,
             });
             console.log('Auth Start Response:', { messageForSign, authId });
             const signature = await signMessageAsync({
