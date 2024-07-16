@@ -15,7 +15,7 @@ import { Input } from '../components/input';
 import { Button } from '../components/button';
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { injected } from 'wagmi/connectors';
-import { haqqMainnet } from 'viem/chains';
+import { haqqMainnet, haqqTestedge2 } from 'viem/chains';
 import { useAtlasAuth } from '../providers/atlas-auth-provider';
 
 export function AtlasAuth() {
@@ -24,17 +24,25 @@ export function AtlasAuth() {
   const { address } = useAccount();
   const { disconnectAsync } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
+  const [refCode, setRefCode] = useState<string>('');
 
   return (
     <Card title="Auth" className="col-span-2">
       <div>
         <div>address: {address}</div>
         <div>token: {token}</div>
+        <div>refCode: {refCode}</div>
       </div>
+      <Input
+        placeholder="refCode"
+        onChange={(event) => {
+          setRefCode(event.currentTarget.value);
+        }}
+      />
       <Button
         onClick={async () => {
           await connectAsync({
-            chainId: haqqMainnet.id,
+            chainId: haqqTestedge2.id,
             connector: injected(),
           });
         }}
@@ -47,6 +55,7 @@ export function AtlasAuth() {
           try {
             const { messageForSign, authId } = await authStart({
               address,
+              refCode,
             });
             console.log('Auth Start Response:', { messageForSign, authId });
             const signature = await signMessageAsync({

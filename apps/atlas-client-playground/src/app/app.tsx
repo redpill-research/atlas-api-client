@@ -58,7 +58,7 @@ export function App() {
         </div>
 
         <AppProviders baseUrl={apiEndpoint}>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AtlasAuth />
             <AtlasGetCountries />
             <AtlasGetProductsByCountries />
