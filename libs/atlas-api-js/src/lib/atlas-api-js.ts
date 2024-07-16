@@ -22,9 +22,11 @@ import {
   GetOrderByIdResponse,
   GetAllOrdersRequest,
   GetAllOrdersResponse,
+  ApiError,
 } from '@red-pill/atlas-proto';
 import {
   AtlasApiClient,
+  IApiError,
   IAuthConfirmResponse,
   IAuthStartResponse,
   ICreateOrderResponse,
@@ -63,9 +65,17 @@ export function createAtlasApiClient({
     });
 
     if (!response.ok) {
-      const errorMessage = response.statusText || 'Unknown error';
+      const responseData = await response.arrayBuffer();
+      const responseMessage = ApiError.fromBinary(new Uint8Array(responseData));
+      const responseMessageJson: unknown = responseMessage.toJson();
+      const responseStatus = response.status;
+      const jsonError = responseMessageJson as IApiError;
+      const errorMessage =
+        `${jsonError.type} - ${jsonError.message}` ??
+        response.statusText ??
+        'Unknown error';
       throw new Error(
-        `Request failed with status: ${response.status} - ${errorMessage}`,
+        `Request failed with status: ${responseStatus} - ${errorMessage}`,
       );
     }
 
