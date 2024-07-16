@@ -1,3 +1,22 @@
+## 0.15.0 (2024-07-16)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** add types for api errors ([20959c5](https://github.com/redpill-research/protocat-client-lab/commit/20959c5))
+
+- **atlas-api-js:** add fetcher error handling ([949b920](https://github.com/redpill-research/protocat-client-lab/commit/949b920))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.14.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.14.3 (2024-07-15)
 
 
