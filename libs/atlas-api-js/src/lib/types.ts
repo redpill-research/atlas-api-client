@@ -205,3 +205,18 @@ export interface AtlasApiClient {
     authToken: string,
   ) => Promise<IGetAllOrdersResponse>;
 }
+
+export interface IApiError {
+  type: ApiErrorEnum;
+  message: string;
+}
+
+export enum ApiErrorEnum {
+  UNKNOWN = 'UNKNOWN',
+  INVALID_ARGUMENT = 'INVALID_ARGUMENT',
+  INVALID_PAYLOAD = 'INVALID_PAYLOAD',
+  UNAUTHENTICATED = 'UNAUTHENTICATED',
+  UNIMPLEMENTED = 'UNIMPLEMENTED',
+  INTERNAL = 'INTERNAL',
+  DONT_HAVE_INVITE = 'DONT_HAVE_INVITE',
+}
