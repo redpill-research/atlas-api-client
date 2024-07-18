@@ -260,6 +260,16 @@ export class GetProductsByCountryRequest extends Message<GetProductsByCountryReq
    */
   countryId = "";
 
+  /**
+   * @generated from field: int32 page = 2;
+   */
+  page = 0;
+
+  /**
+   * @generated from field: int32 limit = 3;
+   */
+  limit = 0;
+
   constructor(data?: PartialMessage<GetProductsByCountryRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -269,6 +279,8 @@ export class GetProductsByCountryRequest extends Message<GetProductsByCountryReq
   static readonly typeName = "api.GetProductsByCountryRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "country_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "page", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "limit", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetProductsByCountryRequest {
@@ -297,6 +309,11 @@ export class GetProductsByCountryResponse extends Message<GetProductsByCountryRe
    */
   products: Product[] = [];
 
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total = 0;
+
   constructor(data?: PartialMessage<GetProductsByCountryResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -306,6 +323,7 @@ export class GetProductsByCountryResponse extends Message<GetProductsByCountryRe
   static readonly typeName = "api.GetProductsByCountryResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "products", kind: "message", T: Product, repeated: true },
+    { no: 2, name: "total", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetProductsByCountryResponse {
@@ -563,6 +581,16 @@ export class GetOrderByIdResponse extends Message<GetOrderByIdResponse> {
  * @generated from message api.GetAllOrdersRequest
  */
 export class GetAllOrdersRequest extends Message<GetAllOrdersRequest> {
+  /**
+   * @generated from field: int32 page = 1;
+   */
+  page = 0;
+
+  /**
+   * @generated from field: int32 limit = 2;
+   */
+  limit = 0;
+
   constructor(data?: PartialMessage<GetAllOrdersRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -571,6 +599,8 @@ export class GetAllOrdersRequest extends Message<GetAllOrdersRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "api.GetAllOrdersRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "page", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "limit", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAllOrdersRequest {
@@ -599,6 +629,11 @@ export class GetAllOrdersResponse extends Message<GetAllOrdersResponse> {
    */
   orders: Order[] = [];
 
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total = 0;
+
   constructor(data?: PartialMessage<GetAllOrdersResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -608,6 +643,7 @@ export class GetAllOrdersResponse extends Message<GetAllOrdersResponse> {
   static readonly typeName = "api.GetAllOrdersResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "orders", kind: "message", T: Order, repeated: true },
+    { no: 2, name: "total", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAllOrdersResponse {
@@ -753,6 +789,11 @@ export class SendInviteResponse extends Message<SendInviteResponse> {
    */
   tx = "";
 
+  /**
+   * @generated from field: string url = 2;
+   */
+  url = "";
+
   constructor(data?: PartialMessage<SendInviteResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -762,6 +803,7 @@ export class SendInviteResponse extends Message<SendInviteResponse> {
   static readonly typeName = "api.SendInviteResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "tx", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendInviteResponse {
