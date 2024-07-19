@@ -103,10 +103,13 @@ export interface IGetCountriesResponse {
 
 export interface IGetProductsByCountryRequest {
   countryId: string;
+  page: number;
+  limit: number;
 }
 
 export interface IGetProductsByCountryResponse {
   products: IProduct[];
+  total: number;
 }
 
 export interface IGetProductByIdRequest {
@@ -135,10 +138,14 @@ export interface IGetOrderByIdResponse {
   order: IOrder;
 }
 
-export interface IGetAllOrdersRequest {}
+export interface IGetAllOrdersRequest {
+  page: number;
+  limit: number;
+}
 
 export interface IGetAllOrdersResponse {
   orders: IOrder[];
+  total: number;
 }
 
 export interface IGetReferralInfoRequest {}
@@ -155,6 +162,7 @@ export interface ISendInviteRequest {
 
 export interface ISendInviteResponse {
   tx: string;
+  url: string;
 }
 
 export interface IGenerateInviteCodeRequest {}
