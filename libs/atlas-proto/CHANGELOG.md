@@ -1,3 +1,15 @@
+## 0.15.0 (2024-07-19)
+
+
+### 🚀 Features
+
+- **atlas-proto-api:** regenerate lib with pagination for all orders and products by country requests ([331761b](https://github.com/redpill-research/atlas-api-client/commit/331761b))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.14.0 (2024-07-16)
 
 This was a version bump only for atlas-proto to align it with other projects, there were no code changes.

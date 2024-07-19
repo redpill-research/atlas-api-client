@@ -1,3 +1,20 @@
+## 0.15.1 (2024-07-19)
+
+
+### 🩹 Fixes
+
+- **atlas-api-js:** update types in accordance with new proto lib ([12979b9](https://github.com/redpill-research/atlas-api-client/commit/12979b9))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.15.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.15.0 (2024-07-16)
 
 
