@@ -7,26 +7,22 @@ import { useAtlasApiClient } from '../atlas-api-provider';
 
 export function useCreateOrder(
   authToken?: string,
-  options?: Partial<
-    UseMutationOptions<
-      ICreateOrderResponse,
-      Error,
-      Partial<ICreateOrderRequest>
-    >
+  options?: UseMutationOptions<
+    ICreateOrderResponse,
+    Error,
+    Partial<ICreateOrderRequest>
   >,
 ) {
   const { createOrder } = useAtlasApiClient();
 
-  return useMutation<ICreateOrderResponse, Error, Partial<ICreateOrderRequest>>(
-    {
-      mutationFn: async (data) => {
-        if (!authToken) {
-          throw new Error('Authentication token is missing');
-        }
+  return useMutation<ICreateOrderResponse, Error, ICreateOrderRequest>({
+    mutationFn: async (data) => {
+      if (!authToken) {
+        throw new Error('Authentication token is missing');
+      }
 
-        return await createOrder(data, authToken);
-      },
-      ...options,
+      return await createOrder(data, authToken);
     },
-  );
+    ...options,
+  });
 }

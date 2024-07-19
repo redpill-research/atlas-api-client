@@ -6,7 +6,7 @@ import { useAtlasApiClient } from '../atlas-api-provider';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetReferralInfo(
-  data: Partial<IGetReferralInfoRequest>,
+  data: IGetReferralInfoRequest,
   authToken?: string,
   options?: Partial<UseQueryOptions<IGetReferralInfoResponse, Error>>,
 ) {

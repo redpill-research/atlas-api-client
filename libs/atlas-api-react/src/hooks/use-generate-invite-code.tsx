@@ -7,12 +7,10 @@ import { useAtlasApiClient } from '../atlas-api-provider';
 
 export function useGenerateInviteCode(
   authToken?: string,
-  options?: Partial<
-    UseMutationOptions<
-      IGenerateInviteCodeResponse,
-      Error,
-      Partial<IGenerateInviteCodeRequest>
-    >
+  options?: UseMutationOptions<
+    IGenerateInviteCodeResponse,
+    Error,
+    IGenerateInviteCodeRequest
   >,
 ) {
   const { generateInviteCode } = useAtlasApiClient();
@@ -20,7 +18,7 @@ export function useGenerateInviteCode(
   return useMutation<
     IGenerateInviteCodeResponse,
     Error,
-    Partial<IGenerateInviteCodeRequest>
+    IGenerateInviteCodeRequest
   >({
     mutationFn: async (data) => {
       if (!authToken) {

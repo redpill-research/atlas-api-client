@@ -8,12 +8,12 @@ import { useAtlasApiClient } from '../atlas-api-provider';
 export function useSendInvite(
   authToken?: string,
   options?: Partial<
-    UseMutationOptions<ISendInviteResponse, Error, Partial<ISendInviteRequest>>
+    UseMutationOptions<ISendInviteResponse, Error, ISendInviteRequest>
   >,
 ) {
   const { sendInvite } = useAtlasApiClient();
 
-  return useMutation<ISendInviteResponse, Error, Partial<ISendInviteRequest>>({
+  return useMutation<ISendInviteResponse, Error, ISendInviteRequest>({
     mutationFn: async (data) => {
       if (!authToken) {
         throw new Error('Authentication token is missing');

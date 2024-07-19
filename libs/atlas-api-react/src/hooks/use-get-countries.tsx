@@ -6,7 +6,7 @@ import { useAtlasApiClient } from '../atlas-api-provider';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export function useGetCountries(
-  data: Partial<IGetCountriesRequest>,
+  data: IGetCountriesRequest,
   authToken?: string,
   options?: Partial<UseQueryOptions<IGetCountriesResponse, Error>>,
 ) {
