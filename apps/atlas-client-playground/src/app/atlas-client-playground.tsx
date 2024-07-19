@@ -9,21 +9,19 @@ import {
   useGetProductById,
   useGetProductsByCountry,
   useGetReferralInfo,
+  useInfiniteGetAllOrders,
+  useInfiniteGetProductsByCountry,
   useSendInvite,
 } from '@red-pill/atlas-api-react';
 import { Input } from '../components/input';
 import { Button } from '../components/button';
-import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
-import { injected } from 'wagmi/connectors';
-import { haqqMainnet, haqqTestedge2 } from 'viem/chains';
+import { keepPreviousData } from '@tanstack/react-query';
 import { useAtlasAuth } from '../providers/atlas-auth-provider';
+import { useWallet } from '../providers/wallet-provider';
 
 export function AtlasAuth() {
-  const { authStart, authConfirm, logout, token } = useAtlasAuth();
-  const { connectAsync } = useConnect();
-  const { address } = useAccount();
-  const { disconnectAsync } = useDisconnect();
-  const { signMessageAsync } = useSignMessage();
+  const { signIn, logout, token, isLogged } = useAtlasAuth();
+  const { connect, address, connectors } = useWallet();
   const [refCode, setRefCode] = useState<string>('');
 
   return (
@@ -39,57 +37,44 @@ export function AtlasAuth() {
           setRefCode(event.currentTarget.value);
         }}
       />
-      <Button
-        onClick={async () => {
-          await connectAsync({
-            chainId: haqqTestedge2.id,
-            connector: injected(),
-          });
-        }}
-      >
-        Connect wallet
-      </Button>
-      <Button
-        disabled={!address}
-        onClick={async () => {
-          try {
-            const { messageForSign, authId } = await authStart({
-              address,
-              refCode:
+      {!address &&
+        connectors.map((connector) => {
+          return (
+            <Button
+              onClick={async () => {
+                await connect(connector.id);
+              }}
+            >
+              Connect {connector.name}
+            </Button>
+          );
+        })}
+      {!isLogged ? (
+        <Button
+          disabled={!address}
+          onClick={async () => {
+            if (address) {
+              await signIn(
+                address,
                 refCode !== undefined && refCode !== '' ? refCode : undefined,
-            });
-            console.log('Auth Start Response:', { messageForSign, authId });
-            const signature = await signMessageAsync({
-              message: messageForSign,
-            });
-            try {
-              const authConfirmResponse = await authConfirm({
-                authId: authId,
-                signature,
-              });
-              console.log('Auth Confirm Response:', authConfirmResponse);
-            } catch (confirmError) {
-              console.error(
-                'Error during authentication confirmation:',
-                confirmError,
               );
+            } else {
+              console.error('No address to authenticate');
             }
-          } catch (startError) {
-            console.error('Error during authentication start:', startError);
-          }
-        }}
-      >
-        Start auth
-      </Button>
-      <Button
-        disabled={!address}
-        onClick={async () => {
-          logout();
-          await disconnectAsync();
-        }}
-      >
-        Log out
-      </Button>
+          }}
+        >
+          Start auth
+        </Button>
+      ) : (
+        <Button
+          disabled={!address}
+          onClick={async () => {
+            logout();
+          }}
+        >
+          Log out
+        </Button>
+      )}
     </Card>
   );
 }
@@ -108,6 +93,8 @@ export function AtlasGetCountries() {
 export function AtlasGetProductsByCountries() {
   const { token } = useAtlasAuth();
   const [countryId, setCountryId] = useState<string>('');
+  const [page, setPage] = useState<string>(0);
+  const [limit, setLimit] = useState<number>(10);
   const { data: products } = useGetProductsByCountry(
     { countryId },
     token ?? undefined,
@@ -117,12 +104,74 @@ export function AtlasGetProductsByCountries() {
     <Card title="getProductsByCountry" response={products}>
       <Input
         placeholder="countryId"
+        value={countryId}
         onChange={(event) => {
           const value = event.currentTarget.value;
           setCountryId(value);
         }}
       />
+      <Input
+        placeholder="page"
+        value={page}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setPage(value);
+        }}
+      />
+      <Input
+        placeholder="limit"
+        value={limit}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setLimit(Number.parseFloat(value));
+        }}
+      />
       {!token && <div>Require auth before request</div>}
+    </Card>
+  );
+}
+
+export function AtlasInfiniteGetProductsByCountries() {
+  const { token } = useAtlasAuth();
+  const [countryId, setCountryId] = useState<string | undefined>(undefined);
+  const [limit, setLimit] = useState<number | undefined>(10);
+  const {
+    data: products,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteGetProductsByCountry({ countryId, limit }, token ?? undefined);
+
+  return (
+    <Card title="getProductsByCountry infinite hook" response={products}>
+      <Input
+        placeholder="countryId"
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setCountryId(value);
+        }}
+      />
+      <Input
+        placeholder="limit"
+        value={limit}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setLimit(Number.parseInt(value, 10));
+        }}
+      />
+      <Button
+        onClick={() => fetchNextPage()}
+        disabled={!hasNextPage || isFetchingNextPage}
+      >
+        {isFetchingNextPage
+          ? 'Loading more...'
+          : hasNextPage
+            ? 'Load More'
+            : 'Nothing more to load'}
+      </Button>
+      {!token && <div>Require auth before request</div>}
+      <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
     </Card>
   );
 }
@@ -151,11 +200,71 @@ export function AtlasGetProductById() {
 
 export function AtlasGetAllOrders() {
   const { token } = useAtlasAuth();
-  const { data: orders } = useGetAllOrders({}, token ?? undefined);
+  const [page, setPage] = useState<number | undefined>(0);
+  const [limit, setLimit] = useState<number | undefined>(10);
+  const { data: orders } = useGetAllOrders(
+    { page, limit },
+    token ?? undefined,
+    {
+      placeholderData: keepPreviousData,
+    },
+  );
 
   return (
     <Card title="getAllOrders" response={orders}>
+      <Input
+        placeholder="page"
+        value={page}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setPage(Number.parseInt(value, 10));
+        }}
+      />
+      <Input
+        placeholder="limit"
+        value={limit}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setLimit(Number.parseInt(value, 10));
+        }}
+      />
       {!token && <div>Require auth before request</div>}
+    </Card>
+  );
+}
+export function AtlasInfiniteGetAllOrders() {
+  const { token } = useAtlasAuth();
+  const [limit, setLimit] = useState<number>(10);
+  const {
+    data: orders,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isFetching,
+  } = useInfiniteGetAllOrders({ limit }, token ?? undefined);
+
+  return (
+    <Card title="getAllOrders infinite hook" response={orders}>
+      <Input
+        placeholder="limit"
+        value={limit}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setLimit(Number.parseInt(value, 10));
+        }}
+      />
+      <Button
+        onClick={() => fetchNextPage()}
+        disabled={!hasNextPage || isFetchingNextPage}
+      >
+        {isFetchingNextPage
+          ? 'Loading more...'
+          : hasNextPage
+            ? 'Load More'
+            : 'Nothing more to load'}
+      </Button>
+      {!token && <div>Require auth before request</div>}
+      <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>{' '}
     </Card>
   );
 }

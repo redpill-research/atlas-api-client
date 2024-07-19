@@ -1,3 +1,4 @@
+'use client';
 import React, {
   createContext,
   useContext,
@@ -5,57 +6,34 @@ import React, {
   useMemo,
   PropsWithChildren,
   useCallback,
+  useEffect,
 } from 'react';
-import { AuthStartRequest, AuthConfirmRequest } from '@red-pill/atlas-proto';
 import { useAtlasApiClient } from '@red-pill/atlas-api-react';
+import store from 'store2';
+import { Hex } from 'viem';
+import { useSignMessage } from 'wagmi';
+import { useWallet } from './wallet-provider';
 
-interface AuthContextType {
-  token: string | null;
-  authStart: (data: Partial<AuthStartRequest>) => Promise<{
-    authId: string;
-    messageForSign: string;
-  }>;
-  authConfirm: (
-    data: Partial<AuthConfirmRequest>,
-  ) => Promise<{ sessionToken: string }>;
+interface AuthContextTypeBase {
+  signIn: (address: Hex, refCode?: string) => Promise<void>;
   logout: () => void;
+  setSignInError: (error: Error | null) => void;
+  signInError: Error | null;
 }
+
+interface AuthContextTypeAuthorized extends AuthContextTypeBase {
+  isLogged: true;
+  token: string;
+}
+
+interface AuthContextTypeUnauthorized extends AuthContextTypeBase {
+  isLogged: false;
+  token: undefined;
+}
+
+type AuthContextType = AuthContextTypeAuthorized | AuthContextTypeUnauthorized;
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export function AtlasAuthProvider({ children }: PropsWithChildren) {
-  const [token, setToken] = useState<string | null>(null);
-  const apiClient = useAtlasApiClient();
-
-  const authStart = useCallback(
-    async (data: Partial<AuthStartRequest>) => {
-      return await apiClient.authStart(data);
-    },
-    [apiClient],
-  );
-
-  const authConfirm = useCallback(
-    async (data: Partial<AuthConfirmRequest>) => {
-      const { sessionToken } = await apiClient.authConfirm(data);
-      setToken(sessionToken);
-      return { sessionToken };
-    },
-    [apiClient],
-  );
-
-  const value = useMemo(() => {
-    return {
-      token,
-      authStart,
-      authConfirm,
-      logout: () => {
-        setToken(null);
-      },
-    };
-  }, [token, authStart, authConfirm]);
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
 
 export function useAtlasAuth() {
   const context = useContext(AuthContext);
@@ -65,4 +43,84 @@ export function useAtlasAuth() {
   }
 
   return context;
+}
+
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [token, setToken] = useState<string | undefined>(() => {
+    return store.local.get('atlas-auth-token') ?? undefined;
+  });
+  const { authStart, authConfirm } = useAtlasApiClient();
+  const { signMessageAsync } = useSignMessage();
+  const { disconnect } = useWallet();
+  const [signInError, setSignInError] = useState<null | Error>(null);
+
+  useEffect(() => {
+    if (token) {
+      store.local.set('atlas-auth-token', token);
+    } else {
+      store.local.remove('atlas-auth-token');
+    }
+  }, [token]);
+
+  const signIn = useCallback(
+    async (address: string, refCode?: string) => {
+      try {
+        const { messageForSign, authId } = await authStart({
+          address,
+          refCode,
+        });
+        const signature = await signMessageAsync({
+          message: messageForSign,
+        });
+
+        try {
+          const { sessionToken } = await authConfirm({
+            authId: authId,
+            signature,
+          });
+          setToken(sessionToken);
+        } catch (confirmError) {
+          console.error(
+            'Error during authentication confirmation:',
+            confirmError,
+          );
+          throw confirmError;
+        }
+      } catch (startError) {
+        console.error('Error during authentication start:', startError);
+        throw startError;
+      }
+    },
+    [authConfirm, authStart, signMessageAsync],
+  );
+
+  const logout = useCallback(() => {
+    setToken(undefined);
+    setSignInError(null);
+    disconnect();
+  }, [disconnect]);
+
+  const value = useMemo(() => {
+    if (token) {
+      return {
+        token,
+        isLogged: true as const,
+        signIn,
+        logout,
+        signInError,
+        setSignInError,
+      };
+    }
+
+    return {
+      token: undefined,
+      isLogged: false as const,
+      signIn,
+      logout,
+      signInError,
+      setSignInError,
+    };
+  }, [token, signIn, logout, signInError]);
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

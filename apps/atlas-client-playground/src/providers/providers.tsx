@@ -4,7 +4,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AtlasApiProvider } from '@red-pill/atlas-api-react';
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { mainnet } from 'viem/chains';
-import { AtlasAuthProvider } from './atlas-auth-provider';
+import { WalletProvider } from './wallet-provider';
+import { AuthProvider } from './atlas-auth-provider';
 
 const queryClient = new QueryClient();
 export const config = createConfig({
@@ -22,7 +23,9 @@ export function AppProviders({
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <AtlasApiProvider baseUrl={baseUrl}>
-          <AtlasAuthProvider>{children}</AtlasAuthProvider>
+          <WalletProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </WalletProvider>
         </AtlasApiProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>

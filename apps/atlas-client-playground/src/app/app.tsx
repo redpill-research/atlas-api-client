@@ -14,6 +14,8 @@ import {
   AtlasGetOrderById,
   AtlasGetProductById,
   AtlasGetProductsByCountries,
+  AtlasInfiniteGetAllOrders,
+  AtlasInfiniteGetProductsByCountries,
   AtlasRefInfo,
   AtlasSendInvite,
 } from './atlas-client-playground';
@@ -62,8 +64,10 @@ export function App() {
             <AtlasAuth />
             <AtlasGetCountries />
             <AtlasGetProductsByCountries />
+            <AtlasInfiniteGetProductsByCountries />
             <AtlasGetProductById />
             <AtlasGetAllOrders />
+            <AtlasInfiniteGetAllOrders />
             <AtlasGetOrderById />
             <AtlasCreateOrder />
             <AtlasRefInfo />
