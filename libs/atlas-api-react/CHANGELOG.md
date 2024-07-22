@@ -1,3 +1,22 @@
+## 0.16.0 (2024-07-22)
+
+
+### 🚀 Features
+
+- **atlas-api-react:** add pagination params from proto to requests ([fd19a90](https://github.com/redpill-research/atlas-api-client/commit/fd19a90))
+
+- **atlas-api-react:** add limit to infinite queries ([b0e688d](https://github.com/redpill-research/atlas-api-client/commit/b0e688d))
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** don't use partial generic for request types in hooks ([c2d4f00](https://github.com/redpill-research/atlas-api-client/commit/c2d4f00))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.15.0 (2024-07-16)
 
 
