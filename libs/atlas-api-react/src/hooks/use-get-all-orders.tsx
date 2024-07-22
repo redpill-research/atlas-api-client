@@ -18,7 +18,7 @@ export function useInfiniteGetAllOrders(
       Error,
       InfiniteData<IGetAllOrdersResponse, number>,
       IGetAllOrdersResponse,
-      ReadonlyArray<string>,
+      ReadonlyArray<string | number>,
       number
     >
   >,
@@ -28,7 +28,7 @@ export function useInfiniteGetAllOrders(
   const limit = data.limit || 10;
 
   return useInfiniteQuery({
-    queryKey: ['orders'],
+    queryKey: ['orders', limit],
     enabled: !!authToken && authToken.length > 0,
     queryFn: async ({ pageParam }) => {
       if (!authToken) {

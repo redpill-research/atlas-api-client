@@ -36,9 +36,10 @@ export function AtlasAuth() {
         }}
       />
       {!address &&
-        connectors.map((connector) => {
+        connectors.map((connector, index) => {
           return (
             <Button
+              key={`connector-${index}`}
               onClick={async () => {
                 await connect(connector.id);
               }}
