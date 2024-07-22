@@ -3,11 +3,9 @@ import { Card } from '../components/card';
 import {
   useCreateOrder,
   useGenerateInviteCode,
-  useGetAllOrders,
   useGetCountries,
   useGetOrdersById,
   useGetProductById,
-  useGetProductsByCountry,
   useGetReferralInfo,
   useInfiniteGetAllOrders,
   useInfiniteGetProductsByCountry,
@@ -15,7 +13,6 @@ import {
 } from '@red-pill/atlas-api-react';
 import { Input } from '../components/input';
 import { Button } from '../components/button';
-import { keepPreviousData } from '@tanstack/react-query';
 import { useAtlasAuth } from '../providers/atlas-auth-provider';
 import { useWallet } from '../providers/wallet-provider';
 
@@ -33,6 +30,7 @@ export function AtlasAuth() {
       </div>
       <Input
         placeholder="refCode"
+        value={refCode}
         onChange={(event) => {
           setRefCode(event.currentTarget.value);
         }}
@@ -90,63 +88,20 @@ export function AtlasGetCountries() {
   );
 }
 
-export function AtlasGetProductsByCountries() {
+export function AtlasInfiniteGetProductsByCountries() {
   const { token } = useAtlasAuth();
-  const [countryId, setCountryId] = useState<string>('');
-  const [page, setPage] = useState<string>(0);
-  const [limit, setLimit] = useState<number>(10);
-  const { data: products } = useGetProductsByCountry(
-    { countryId },
-    token ?? undefined,
+  const [countryId, setCountryId] = useState<string>(
+    '557cd1c1-b048-45ec-8d56-6fccfbb3b41f',
   );
+  const [limit, setLimit] = useState<number>(50);
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
+    useInfiniteGetProductsByCountry({ countryId, limit }, token ?? undefined);
 
   return (
-    <Card title="getProductsByCountry" response={products}>
+    <Card title="useInfiniteGetProductsByCountry" response={data}>
       <Input
         placeholder="countryId"
         value={countryId}
-        onChange={(event) => {
-          const value = event.currentTarget.value;
-          setCountryId(value);
-        }}
-      />
-      <Input
-        placeholder="page"
-        value={page}
-        onChange={(event) => {
-          const value = event.currentTarget.value;
-          setPage(value);
-        }}
-      />
-      <Input
-        placeholder="limit"
-        value={limit}
-        onChange={(event) => {
-          const value = event.currentTarget.value;
-          setLimit(Number.parseFloat(value));
-        }}
-      />
-      {!token && <div>Require auth before request</div>}
-    </Card>
-  );
-}
-
-export function AtlasInfiniteGetProductsByCountries() {
-  const { token } = useAtlasAuth();
-  const [countryId, setCountryId] = useState<string | undefined>(undefined);
-  const [limit, setLimit] = useState<number | undefined>(10);
-  const {
-    data: products,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-  } = useInfiniteGetProductsByCountry({ countryId, limit }, token ?? undefined);
-
-  return (
-    <Card title="getProductsByCountry infinite hook" response={products}>
-      <Input
-        placeholder="countryId"
         onChange={(event) => {
           const value = event.currentTarget.value;
           setCountryId(value);
@@ -171,14 +126,17 @@ export function AtlasInfiniteGetProductsByCountries() {
             : 'Nothing more to load'}
       </Button>
       {!token && <div>Require auth before request</div>}
-      <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
+      {isFetching && !isFetchingNextPage ? <div>Fetching...</div> : null}
+      <div>pages loaded: {data?.pages.length}</div>
     </Card>
   );
 }
 
 export function AtlasGetProductById() {
   const { token } = useAtlasAuth();
-  const [productId, setProductId] = useState<string>('');
+  const [productId, setProductId] = useState<string>(
+    'dd59fd0e-616b-43f3-8b74-10a38490c713',
+  );
   const { data: product } = useGetProductById(
     { productId },
     token ?? undefined,
@@ -188,6 +146,7 @@ export function AtlasGetProductById() {
     <Card title="getProductById" response={product}>
       <Input
         placeholder="productId"
+        value={productId}
         onChange={(event) => {
           const value = event.currentTarget.value;
           setProductId(value);
@@ -198,40 +157,6 @@ export function AtlasGetProductById() {
   );
 }
 
-export function AtlasGetAllOrders() {
-  const { token } = useAtlasAuth();
-  const [page, setPage] = useState<number | undefined>(0);
-  const [limit, setLimit] = useState<number | undefined>(10);
-  const { data: orders } = useGetAllOrders(
-    { page, limit },
-    token ?? undefined,
-    {
-      placeholderData: keepPreviousData,
-    },
-  );
-
-  return (
-    <Card title="getAllOrders" response={orders}>
-      <Input
-        placeholder="page"
-        value={page}
-        onChange={(event) => {
-          const value = event.currentTarget.value;
-          setPage(Number.parseInt(value, 10));
-        }}
-      />
-      <Input
-        placeholder="limit"
-        value={limit}
-        onChange={(event) => {
-          const value = event.currentTarget.value;
-          setLimit(Number.parseInt(value, 10));
-        }}
-      />
-      {!token && <div>Require auth before request</div>}
-    </Card>
-  );
-}
 export function AtlasInfiniteGetAllOrders() {
   const { token } = useAtlasAuth();
   const [limit, setLimit] = useState<number>(10);
@@ -244,7 +169,7 @@ export function AtlasInfiniteGetAllOrders() {
   } = useInfiniteGetAllOrders({ limit }, token ?? undefined);
 
   return (
-    <Card title="getAllOrders infinite hook" response={orders}>
+    <Card title="useInfiniteGetAllOrders" response={orders}>
       <Input
         placeholder="limit"
         value={limit}
@@ -277,6 +202,7 @@ export function AtlasGetOrderById() {
     <Card title="getOrderById" response={orders}>
       <Input
         placeholder="orderId"
+        value={orderId}
         onChange={(event) => {
           setOrderId(event.currentTarget.value);
         }}
@@ -289,21 +215,23 @@ export function AtlasGetOrderById() {
 export function AtlasCreateOrder() {
   const { token } = useAtlasAuth();
   const [productId, setProductId] = useState<string>('');
-  const [productDenomination, setProductDenomination] = useState<number | null>(
-    null,
-  );
+  const [productDenomination, setProductDenomination] = useState<
+    number | undefined
+  >(undefined);
   const { mutateAsync, data: response } = useCreateOrder(token ?? undefined);
 
   return (
     <Card title="createOrder" response={response}>
       <Input
         placeholder="productId"
+        value={productId}
         onChange={(event) => {
           setProductId(event.currentTarget.value);
         }}
       />
       <Input
         placeholder="productDenomination"
+        value={productDenomination}
         onChange={(event) => {
           setProductDenomination(Number.parseFloat(event.currentTarget.value));
         }}
@@ -368,6 +296,7 @@ export function AtlasSendInvite() {
       {!token && <div>Require auth before request</div>}
       <Input
         placeholder="address"
+        value={address}
         onChange={(event) => {
           setAddress(event.currentTarget.value);
         }}

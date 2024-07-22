@@ -4,49 +4,22 @@ import {
 } from '@red-pill/atlas-api-js';
 import { useAtlasApiClient } from '../atlas-api-provider';
 import {
+  InfiniteData,
   useInfiniteQuery,
   UseInfiniteQueryOptions,
-  useQuery,
-  UseQueryOptions,
 } from '@tanstack/react-query';
 
-export function useGetProductsByCountry(
-  data: IGetProductsByCountryRequest,
-  authToken?: string,
-  options?: Partial<UseQueryOptions<IGetProductsByCountryResponse, Error>>,
-) {
-  const { getProductsByCountry } = useAtlasApiClient();
-  const countryId = data.countryId;
-
-  return useQuery<IGetProductsByCountryResponse>({
-    queryKey: ['products', countryId, data.page],
-    enabled:
-      !!authToken &&
-      authToken.length > 0 &&
-      !!countryId &&
-      countryId.length > 0,
-    queryFn: async () => {
-      if (!authToken) {
-        throw new Error('Authentication token is missing');
-      }
-
-      return await getProductsByCountry(data, authToken);
-    },
-    ...options,
-  });
-}
-
 export function useInfiniteGetProductsByCountry(
-  data: Partial<IGetProductsByCountryRequest>,
+  data: Omit<IGetProductsByCountryRequest, 'page'>,
   authToken?: string,
   options?: Partial<
     UseInfiniteQueryOptions<
       IGetProductsByCountryResponse,
       Error,
-      IGetProductsByCountryResponse,
+      InfiniteData<IGetProductsByCountryResponse, number>,
       IGetProductsByCountryResponse,
       ReadonlyArray<string | number | undefined>,
-      number | false
+      number
     >
   >,
 ) {
@@ -54,14 +27,8 @@ export function useInfiniteGetProductsByCountry(
   const countryId = data.countryId;
   const limit = data.limit || 10;
 
-  return useInfiniteQuery<
-    IGetProductsByCountryResponse,
-    Error,
-    IGetProductsByCountryResponse,
-    ReadonlyArray<string | number | undefined>,
-    number | false
-  >({
-    queryKey: ['products', countryId],
+  return useInfiniteQuery({
+    queryKey: ['products', countryId, limit],
     enabled:
       !!authToken &&
       authToken.length > 0 &&
@@ -79,17 +46,17 @@ export function useInfiniteGetProductsByCountry(
       const requestData: IGetProductsByCountryRequest = {
         countryId: countryId,
         page: pageParam || 0,
-        limit: limit,
+        limit,
       };
 
       return await getProductsByCountry(requestData, authToken);
     },
     initialPageParam: 0,
-    getNextPageParam: (lastPage, pages) => {
+    getNextPageParam: (lastPage, _, lastPageParam) => {
       const totalPages = Math.ceil(lastPage.total / limit);
-      const nextPage = pages.length + 1;
+      const nextPage = lastPageParam + 1;
 
-      return nextPage <= totalPages ? nextPage : false;
+      return nextPage < totalPages ? nextPage : null;
     },
     ...options,
   });

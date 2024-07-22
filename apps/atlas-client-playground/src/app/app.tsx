@@ -9,11 +9,9 @@ import {
   AtlasAuth,
   AtlasCreateOrder,
   AtlasGenerateInviteCode,
-  AtlasGetAllOrders,
   AtlasGetCountries,
   AtlasGetOrderById,
   AtlasGetProductById,
-  AtlasGetProductsByCountries,
   AtlasInfiniteGetAllOrders,
   AtlasInfiniteGetProductsByCountries,
   AtlasRefInfo,
@@ -63,10 +61,8 @@ export function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AtlasAuth />
             <AtlasGetCountries />
-            <AtlasGetProductsByCountries />
             <AtlasInfiniteGetProductsByCountries />
             <AtlasGetProductById />
-            <AtlasGetAllOrders />
             <AtlasInfiniteGetAllOrders />
             <AtlasGetOrderById />
             <AtlasCreateOrder />
