@@ -150,6 +150,15 @@ export function createAtlasApiClient({
         const responseMessage = GetProductsByCountryResponse.fromBinary(
           new Uint8Array(responseData),
         );
+
+        // Because it's deserialize to an empty object
+        if (responseMessage.total === 0) {
+          return {
+            products: [],
+            total: 0,
+          } as IGetProductsByCountryResponse;
+        }
+
         const responseMessageJson: unknown = responseMessage.toJson();
 
         return responseMessageJson as IGetProductsByCountryResponse;
@@ -290,6 +299,15 @@ export function createAtlasApiClient({
         const responseMessage = GetAllOrdersResponse.fromBinary(
           new Uint8Array(responseData),
         );
+
+        // Because it's deserialize to an empty object
+        if (responseMessage.total === 0) {
+          return {
+            orders: [],
+            total: 0,
+          } as IGetAllOrdersResponse;
+        }
+
         const responseMessageJson: unknown = responseMessage.toJson();
 
         return responseMessageJson as IGetAllOrdersResponse;
