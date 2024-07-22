@@ -1,3 +1,20 @@
+## 0.15.2 (2024-07-22)
+
+
+### 🩹 Fixes
+
+- **atlas-js-api:** directly send empty response if total == 0 ([e5a8da4](https://github.com/redpill-research/protocat-client-lab/commit/e5a8da4))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.15.1
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.15.1 (2024-07-19)
 
 
