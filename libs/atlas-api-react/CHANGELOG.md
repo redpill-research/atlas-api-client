@@ -1,3 +1,15 @@
+## 0.16.1 (2024-07-22)
+
+
+### 🩹 Fixes
+
+- **atlas-api-react:** add limit to get all orders query key ([933211d](https://github.com/redpill-research/atlas-api-client/commit/933211d))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.16.0 (2024-07-22)
 
 
