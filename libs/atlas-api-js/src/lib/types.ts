@@ -47,8 +47,8 @@ export interface IInviteCode {
 
 export interface ICardData {
   url: string;
-  code: string;
-  expiryDateIso: string; // "2024-06-29T19:48:24.334Z"
+  code?: string;
+  expiryDateIso?: string; // "2024-06-29T19:48:24.334Z"
   faceValue: number;
 }
 
