@@ -349,16 +349,16 @@ export class CardData extends Message<CardData> {
   url = "";
 
   /**
-   * @generated from field: string code = 2;
+   * @generated from field: optional string code = 2;
    */
-  code = "";
+  code?: string;
 
   /**
    * "2024-06-29T19:48:24.334Z"
    *
-   * @generated from field: string expiry_date_iso = 3;
+   * @generated from field: optional string expiry_date_iso = 3;
    */
-  expiryDateIso = "";
+  expiryDateIso?: string;
 
   /**
    * @generated from field: double face_value = 4;
@@ -374,8 +374,8 @@ export class CardData extends Message<CardData> {
   static readonly typeName = "models.CardData";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "expiry_date_iso", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "code", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "expiry_date_iso", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 4, name: "face_value", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ]);
 
