@@ -1,3 +1,20 @@
+## 0.15.3 (2024-07-23)
+
+
+### 🩹 Fixes
+
+- **atlas-api-js:** update types for card data ([1977846](https://github.com/redpill-research/atlas-api-client/commit/1977846))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-proto to 0.16.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.15.2 (2024-07-22)
 
 
