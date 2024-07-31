@@ -15,7 +15,7 @@ module.exports = withNx(
   },
   {
     // Provide additional rollup configuration here. See: https://rollupjs.org/configuration-options
-    output: { sourcemap: true },
+    output: { sourcemap: false },
     plugins: [
       svg({
         svgo: false,
