@@ -424,6 +424,112 @@ export class GetProductByIdResponse extends Message<GetProductByIdResponse> {
 }
 
 /**
+ * @generated from message api.SearchProductsRequest
+ */
+export class SearchProductsRequest extends Message<SearchProductsRequest> {
+  /**
+   * *
+   * @description: country of products
+   * @required: true
+   *
+   * @generated from field: string country_id = 1;
+   */
+  countryId = "";
+
+  /**
+   * *
+   * @description: name of products
+   * @required: true
+   *
+   * @generated from field: string name = 2;
+   */
+  name = "";
+
+  /**
+   * @generated from field: optional int32 page = 3;
+   */
+  page?: number;
+
+  /**
+   * @generated from field: optional int32 limit = 4;
+   */
+  limit?: number;
+
+  constructor(data?: PartialMessage<SearchProductsRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.SearchProductsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "country_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "page", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 4, name: "limit", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SearchProductsRequest {
+    return new SearchProductsRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SearchProductsRequest {
+    return new SearchProductsRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SearchProductsRequest {
+    return new SearchProductsRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SearchProductsRequest | PlainMessage<SearchProductsRequest> | undefined, b: SearchProductsRequest | PlainMessage<SearchProductsRequest> | undefined): boolean {
+    return proto3.util.equals(SearchProductsRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message api.SearchProductsResponse
+ */
+export class SearchProductsResponse extends Message<SearchProductsResponse> {
+  /**
+   * @generated from field: repeated models.Product products = 1;
+   */
+  products: Product[] = [];
+
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total = 0;
+
+  constructor(data?: PartialMessage<SearchProductsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.SearchProductsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "products", kind: "message", T: Product, repeated: true },
+    { no: 2, name: "total", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SearchProductsResponse {
+    return new SearchProductsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SearchProductsResponse {
+    return new SearchProductsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SearchProductsResponse {
+    return new SearchProductsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SearchProductsResponse | PlainMessage<SearchProductsResponse> | undefined, b: SearchProductsResponse | PlainMessage<SearchProductsResponse> | undefined): boolean {
+    return proto3.util.equals(SearchProductsResponse, a, b);
+  }
+}
+
+/**
  * @generated from message api.CreateOrderRequest
  */
 export class CreateOrderRequest extends Message<CreateOrderRequest> {
