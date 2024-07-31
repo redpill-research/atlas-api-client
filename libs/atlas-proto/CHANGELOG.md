@@ -1,3 +1,15 @@
+## 0.17.0 (2024-07-31)
+
+
+### 🚀 Features
+
+- **atlas-proto:** regenerate with new proto ([2e3ebc4](https://github.com/redpill-research/atlas-api-client/commit/2e3ebc4))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.16.0 (2024-07-23)
 
 
