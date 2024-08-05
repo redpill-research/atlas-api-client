@@ -36,8 +36,12 @@ jobs:
         run: pnpm exec nx report
         shell: bash
 
+      - name: Test packages
+        run: pnpm exec nx run-many --target=test
+        shell: bash
+
       - name: Release packages
-        run: pnpm exec nx release --skip-publish --verbose
+        run: pnpm exec nx release --skip-publish
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

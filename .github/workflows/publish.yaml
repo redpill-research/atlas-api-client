@@ -46,11 +46,11 @@ jobs:
         shell: bash
 
       - name: Build packages
-        run: pnpm exec nx run-many --target=build --verbose
+        run: pnpm exec nx run-many --target=build
         shell: bash
 
       - name: Publish to npm
-        run: pnpm exec nx release publish --verbose
+        run: pnpm exec nx release publish
         shell: bash
         env:
           NPM_CONFIG_PROVENANCE: true
