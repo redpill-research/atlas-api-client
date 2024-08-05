@@ -121,6 +121,18 @@ export interface IGetProductByIdResponse {
   productCountry?: ICountry;
 }
 
+export interface ISearchProductsRequest {
+  countryId: string;
+  name: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface ISearchProductsResponse {
+  products: IProduct[];
+  total: number;
+}
+
 export interface ICreateOrderRequest {
   productId: string;
   productDenomination: number;
@@ -212,6 +224,10 @@ export interface AtlasApiClient {
     data: Partial<IGetAllOrdersRequest>,
     authToken: string,
   ) => Promise<IGetAllOrdersResponse>;
+  searchProducts: (
+    data: Partial<ISearchProductsRequest>,
+    authToken: string,
+  ) => Promise<ISearchProductsResponse>;
 }
 
 export interface IApiError {

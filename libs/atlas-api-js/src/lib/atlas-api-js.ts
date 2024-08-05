@@ -23,6 +23,8 @@ import {
   GetAllOrdersRequest,
   GetAllOrdersResponse,
   ApiError,
+  SearchProductsRequest,
+  SearchProductsResponse,
 } from '@red-pill/atlas-proto';
 import {
   AtlasApiClient,
@@ -37,6 +39,7 @@ import {
   IGetProductByIdResponse,
   IGetProductsByCountryResponse,
   IGetReferralInfoResponse,
+  ISearchProductsResponse,
   ISendInviteResponse,
 } from './types';
 
@@ -313,6 +316,35 @@ export function createAtlasApiClient({
         return responseMessageJson as IGetAllOrdersResponse;
       } catch (error) {
         console.error('Error fetching all orders:', error);
+        throw error;
+      }
+    },
+    searchProducts: async (data, authToken) => {
+      try {
+        const requestData = new SearchProductsRequest(data);
+        const response = await postRequest(
+          '/api/v1/products/search',
+          requestData,
+          authToken,
+        );
+        const responseData = await response.arrayBuffer();
+        const responseMessage = SearchProductsResponse.fromBinary(
+          new Uint8Array(responseData),
+        );
+
+        // Because it's deserialize to an empty object
+        if (responseMessage.total === 0) {
+          return {
+            products: [],
+            total: 0,
+          } as ISearchProductsResponse;
+        }
+
+        const responseMessageJson: unknown = responseMessage.toJson();
+
+        return responseMessageJson as ISearchProductsResponse;
+      } catch (error) {
+        console.error('Error searching products:', error);
         throw error;
       }
     },
