@@ -15,6 +15,7 @@ import {
   AtlasInfiniteGetAllOrders,
   AtlasInfiniteGetProductsByCountries,
   AtlasRefInfo,
+  AtlasSearchProducts,
   AtlasSendInvite,
 } from './atlas-client-playground';
 import { AppProviders } from '../providers/providers';
@@ -61,6 +62,7 @@ export function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AtlasAuth />
             <AtlasGetCountries />
+            <AtlasSearchProducts />
             <AtlasInfiniteGetProductsByCountries />
             <AtlasGetProductById />
             <AtlasInfiniteGetAllOrders />

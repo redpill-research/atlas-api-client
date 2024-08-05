@@ -9,6 +9,7 @@ import {
   useGetReferralInfo,
   useInfiniteGetAllOrders,
   useInfiniteGetProductsByCountry,
+  useProductsSearch,
   useSendInvite,
 } from '@red-pill/atlas-api-react';
 import { Input } from '../components/input';
@@ -106,6 +107,58 @@ export function AtlasInfiniteGetProductsByCountries() {
         onChange={(event) => {
           const value = event.currentTarget.value;
           setCountryId(value);
+        }}
+      />
+      <Input
+        placeholder="limit"
+        value={limit}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setLimit(Number.parseInt(value, 10));
+        }}
+      />
+      <Button
+        onClick={() => fetchNextPage()}
+        disabled={!hasNextPage || isFetchingNextPage}
+      >
+        {isFetchingNextPage
+          ? 'Loading more...'
+          : hasNextPage
+            ? 'Load More'
+            : 'Nothing more to load'}
+      </Button>
+      {!token && <div>Require auth before request</div>}
+      {isFetching && !isFetchingNextPage ? <div>Fetching...</div> : null}
+      <div>pages loaded: {data?.pages.length}</div>
+    </Card>
+  );
+}
+
+export function AtlasSearchProducts() {
+  const { token } = useAtlasAuth();
+  const [countryId, setCountryId] = useState<string>(
+    '557cd1c1-b048-45ec-8d56-6fccfbb3b41f',
+  );
+  const [limit, setLimit] = useState<number>(50);
+  const [name, setName] = useState<string>('gift');
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
+    useProductsSearch({ countryId, name, limit }, token ?? undefined);
+
+  return (
+    <Card title="useInfiniteGetProductsByCountry" response={data}>
+      <Input
+        placeholder="countryId"
+        value={countryId}
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setCountryId(value);
+        }}
+      />
+      <Input
+        placeholder="name"
+        value={name}
+        onChange={(event) => {
+          setName(event.currentTarget.value);
         }}
       />
       <Input

@@ -35,8 +35,7 @@ export interface WalletProviderInterface {
   sendTransaction: SendTransactionMutateAsync<Config, unknown>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const WalletContext = createContext<WalletProviderInterface>(null!);
+const WalletContext = createContext<WalletProviderInterface | null>(null);
 
 export function useWallet() {
   const walletService = useContext(WalletContext);
