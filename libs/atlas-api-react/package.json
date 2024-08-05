@@ -1,12 +1,12 @@
 {
   "name": "@red-pill/atlas-api-react",
-  "version": "0.16.2",
+  "version": "0.17.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redpill-research/atlas-api-client.git"
   },
   "dependencies": {
-    "@red-pill/atlas-api-js": "^0.15.4"
+    "@red-pill/atlas-api-js": "^0.16.0"
   },
   "peerDependencies": {
     "react": "^18.3.1",

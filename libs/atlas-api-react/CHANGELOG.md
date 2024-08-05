@@ -1,3 +1,20 @@
+## 0.17.0 (2024-08-05)
+
+
+### 🚀 Features
+
+- **atlas-api-react:** add search products hook ([cf08d90](https://github.com/redpill-research/atlas-api-client/commit/cf08d90))
+
+
+### 🧱 Updated Dependencies
+
+- Updated atlas-api-js to 0.16.0
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.16.2 (2024-07-22)
 
 

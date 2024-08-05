@@ -1,3 +1,15 @@
+## 0.16.0 (2024-08-05)
+
+
+### 🚀 Features
+
+- **atlas-api-js:** add `searchProducts` request and types to api client ([3ca4af6](https://github.com/redpill-research/atlas-api-client/commit/3ca4af6))
+
+
+### ❤️  Thank You
+
+- Oleg Shilov @olegshilov
+
 ## 0.15.4 (2024-07-31)
 
 
