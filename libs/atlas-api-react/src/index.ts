@@ -9,3 +9,4 @@ export * from './hooks/use-create-order';
 export * from './hooks/use-get-referral-info';
 export * from './hooks/use-generate-invite-code';
 export * from './hooks/use-send-invite';
+export * from './hooks/use-products-search';

@@ -1,7 +1,7 @@
 import { AtlasApiClient, createAtlasApiClient } from '@red-pill/atlas-api-js';
 import { PropsWithChildren, createContext, useContext, useMemo } from 'react';
 
-const AtlasApiContext = createContext<AtlasApiClient>(null!);
+const AtlasApiContext = createContext<AtlasApiClient | null>(null);
 
 export function AtlasApiProvider({
   children,
